@@ -4,8 +4,8 @@ export default function SEO() {
   const title = "Ruang Tugas | Joki Tugas, Joki Canva, Joki IT & Bantuan Tugas Kuliah";
   const description = "Ruang Tugas menyediakan bantuan tugas sekolah dan kuliah, mulai dari IT, coding, Canva, matematika, karya ilmiah, jaringan komputer, hingga berbagai kebutuhan akademik lainnya.";
   const keywords = "joki tugas, joki tugas kuliah, joki tugas sekolah, joki canva, joki IT, joki coding, joki matematika, joki karya ilmiah, joki makalah, joki presentasi, joki jaringan komputer, tugas SMA, tugas SMK";
-  const url = "https://ruangtugas.com/";
-  const image = "https://ruangtugas.com/og-image.jpg"; // Placeholder for an actual image
+  const url = "https://ruangtugas.vercel.app/";
+  const image = "https://ruangtugas.vercel.app/og-image.png"; // Placeholder for an actual image
 
   // JSON-LD Structured Data
   const organizationSchema = {
