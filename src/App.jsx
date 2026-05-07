@@ -1,3 +1,4 @@
+import SEO from './components/SEO';
 import Navbar from './components/Navbar';
 import BottomNav from './components/BottomNav';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -11,6 +12,7 @@ import Footer from './components/Footer';
 export default function App() {
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
+      <SEO />
       <Navbar />
       <main>
         <Hero />

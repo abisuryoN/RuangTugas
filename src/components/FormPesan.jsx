@@ -110,8 +110,8 @@ export default function FormPesan() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 mb-4">
             <span className="text-xs font-semibold text-primary-dark tracking-wide uppercase">Pesan Sekarang</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 tracking-tight">
-            <span className="text-text-heading">Siap Pesan </span><span className="text-gradient">Tugas?</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 tracking-tight text-text-heading">
+            Form Pemesanan
           </h2>
           <p className="text-text-body/70 text-base sm:text-lg leading-relaxed">
             Isi form di bawah dan pesananmu akan langsung diterima oleh tim kami secara otomatis.

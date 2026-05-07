@@ -74,7 +74,7 @@ export default function Keunggulan() {
             <span className="text-[11px] font-semibold text-primary-dark tracking-wide uppercase">Keunggulan Kami</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-extrabold mb-4 tracking-tight">
-            <span className="text-text-heading">Kenapa Memilih </span><span className="text-gradient">Ruang Tugas?</span>
+            <span className="text-text-heading">Kenapa Memilih </span><span className="text-gradient">Ruang Tugas</span>
           </h2>
           <p className="text-text-body/70 text-sm sm:text-base leading-relaxed">
             Kami berkomitmen memberikan layanan terbaik untuk membantu kesuksesan akademikmu.
@@ -86,7 +86,7 @@ export default function Keunggulan() {
           {keunggulan.map((item, i) => {
             const Icon = item.icon;
             return (
-              <div
+              <article
                 key={i}
                 className={`group relative p-6 md:p-8 rounded-2xl bg-white border border-blue-50 shadow-sm hover:shadow-xl ${item.glow} hover:-translate-y-1.5 transition-all duration-300`}
               >
@@ -105,7 +105,7 @@ export default function Keunggulan() {
 
                 {/* Hover glow background */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              </div>
+              </article>
             );
           })}
         </div>

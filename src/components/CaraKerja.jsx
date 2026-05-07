@@ -78,14 +78,13 @@ export default function CaraKerja() {
   return (
     <section id="cara-kerja" ref={sectionRef} className="relative bg-white overflow-hidden">
       <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-20 py-20 md:py-28">
-        {/* Section Header */}
         <div className="carakerja-title text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 mb-4">
-            <span className="text-xs font-semibold text-primary-dark tracking-wide uppercase">Cara Kerja</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 tracking-tight">
-            <span className="text-text-heading">Semudah </span><span className="text-gradient">5 Langkah</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 tracking-tight text-text-heading">
+            Cara Kerja
           </h2>
+          <p className="text-xl font-bold mb-2">
+            <span className="text-text-heading">Semudah </span><span className="text-gradient">5 Langkah</span>
+          </p>
           <p className="text-text-body/70 text-base sm:text-lg leading-relaxed">
             Proses pemesanan yang cepat, mudah, dan otomatis tanpa ribet.
           </p>

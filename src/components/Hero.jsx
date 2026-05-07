@@ -8,7 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
 // SVG Illustration: SD - white shirt, red pants/skirt
 function StudentSD({ className = '' }) {
   return (
-    <svg className={className} viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sdTitle">
+      <title id="sdTitle">Ilustrasi siswa belajar</title>
       {/* Body - White shirt */}
       <rect x="65" y="120" width="70" height="80" rx="15" fill="white" stroke="#E5E7EB" strokeWidth="1.5" />
       {/* Collar */}
@@ -55,7 +56,8 @@ function StudentSD({ className = '' }) {
 // SVG Illustration: SMP - white shirt, navy/dark blue pants
 function StudentSMP({ className = '' }) {
   return (
-    <svg className={className} viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="smpTitle">
+      <title id="smpTitle">Ilustrasi pendidikan modern</title>
       {/* Body - White shirt */}
       <rect x="62" y="125" width="76" height="85" rx="15" fill="white" stroke="#E5E7EB" strokeWidth="1.5" />
       {/* Collar */}
@@ -106,7 +108,8 @@ function StudentSMP({ className = '' }) {
 // SVG Illustration: SMA - white shirt, gray pants
 function StudentSMA({ className = '' }) {
   return (
-    <svg className={className} viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="smaTitle">
+      <title id="smaTitle">Ilustrasi laptop dan tugas akademik</title>
       {/* Body - White shirt */}
       <rect x="60" y="130" width="80" height="95" rx="15" fill="white" stroke="#E5E7EB" strokeWidth="1.5" />
       {/* Collar */}
@@ -159,7 +162,8 @@ function StudentSMA({ className = '' }) {
 // SVG Illustration: Kuliah - blue jacket, graduation cap
 function StudentKuliah({ className = '' }) {
   return (
-    <svg className={className} viewBox="0 0 200 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} viewBox="0 0 200 310" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="kuliahTitle">
+      <title id="kuliahTitle">Ilustrasi mahasiswa mengerjakan tugas</title>
       {/* Body - Blue Jacket */}
       <rect x="58" y="135" width="84" height="105" rx="15" fill="#2563EB" />
       {/* Jacket detail - zipper */}
@@ -291,7 +295,7 @@ export default function Hero() {
             </div>
 
             <h1 className="hero-headline text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-5xl font-extrabold leading-tight tracking-tight mb-4">
-              <span className="text-text-heading">Ruang Tugas</span>
+              <span className="text-text-heading">Ruang Tugas<span className="sr-only"> — </span></span>
               <br />
               <span className="text-gradient">Solusi Tugas</span>
               <br />

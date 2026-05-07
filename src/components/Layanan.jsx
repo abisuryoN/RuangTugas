@@ -81,11 +81,11 @@ export default function Layanan() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-blue-100 mb-3">
             <span className="text-[11px] font-semibold text-primary-dark tracking-wide uppercase">Layanan Kami</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-extrabold mb-3 tracking-tight">
-            <span className="text-text-heading">Apa yang Bisa Kami </span><span className="text-gradient">Bantu?</span>
+          <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-extrabold mb-3 tracking-tight text-text-heading">
+            Layanan Kami
           </h2>
           <p className="text-text-body/70 text-sm sm:text-base leading-relaxed">
-            Berbagai jenis tugas akademik yang dapat kami kerjakan dengan profesional dan tepat waktu.
+            Ruang Tugas menyediakan bantuan untuk berbagai kebutuhan akademik seperti tugas sekolah, tugas kuliah, Canva, coding, matematika, karya ilmiah, jaringan komputer, presentasi, dan kebutuhan pembelajaran lainnya.
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export default function Layanan() {
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
-              <div
+              <article
                 key={i}
                 className={`service-card group relative p-5 md:p-6 rounded-xl bg-white border border-blue-50 shadow-sm hover:shadow-lg ${service.glow} hover:-translate-y-1 transition-all duration-300 cursor-default`}
               >
@@ -113,7 +113,7 @@ export default function Layanan() {
 
                 {/* Hover glow */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              </div>
+              </article>
             );
           })}
         </div>
