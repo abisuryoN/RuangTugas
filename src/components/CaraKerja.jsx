@@ -124,8 +124,8 @@ export default function CaraKerja() {
 
                 {/* Vertical Line & Plane (Mobile) */}
                 {i < steps.length - 1 && (
-                  <div className="lg:hidden absolute top-20 left-1/2 -translate-x-1/2 h-16 w-px border-l-2 border-dashed border-primary/40 z-0">
-                    <HiPaperAirplane className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-primary rotate-180 text-lg animate-pulse" />
+                  <div className="lg:hidden absolute top-full left-1/2 -translate-x-1/2 h-16 w-px border-l-2 border-dashed border-primary/40 z-0">
+                    <HiPaperAirplane className="absolute top-1/2 left-1/2 -translate-x-1/2 text-primary rotate-180 text-lg animate-pulse" />
                   </div>
                 )}
 
@@ -134,7 +134,7 @@ export default function CaraKerja() {
                   <div className={`absolute inset-0 bg-gradient-to-br ${step.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
                   
                   <div className={`relative w-20 h-20 rounded-3xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-400 z-10`}>
-                    <Icon className="text-white text-3xl" />
+                    <Icon className={`text-white text-3xl ${Icon === HiPaperAirplane ? 'rotate-90' : ''}`} />
                   </div>
                   
                   <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center text-xs font-bold text-primary-dark border border-blue-100 z-20">
