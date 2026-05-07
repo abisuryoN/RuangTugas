@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { HiMenuAlt3, HiX } from 'react-icons/hi';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,9 +14,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef(null);
-  const mobileMenuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,21 +26,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (mobileOpen && mobileMenuRef.current) {
-      gsap.from(mobileMenuRef.current.children, {
-        y: 20,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 0.4,
-        ease: 'power2.out',
-      });
-    }
-  }, [mobileOpen]);
-
   const handleNavClick = (e, href) => {
     e.preventDefault();
-    setMobileOpen(false);
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
@@ -94,42 +78,8 @@ export default function Navbar() {
           >
             Pesan Sekarang
           </a>
-
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 rounded-xl text-text-heading hover:bg-blue-50 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
-          </button>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-2xl border-t border-blue-100/50 shadow-xl">
-          <div ref={mobileMenuRef} className="px-4 py-4 space-y-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="block px-4 py-3 rounded-xl text-sm font-medium text-text-body hover:text-primary-dark hover:bg-blue-50/60 transition-all duration-200"
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#pesan"
-              onClick={(e) => handleNavClick(e, '#pesan')}
-              className="block text-center px-4 py-3 mt-2 bg-gradient-to-r from-primary to-primary-deeper text-white font-semibold rounded-xl shadow-lg shadow-primary/30"
-            >
-              Pesan Sekarang
-            </a>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
