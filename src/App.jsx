@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar';
 import BottomNav from './components/BottomNav';
+import WhatsAppButton from './components/WhatsAppButton';
 import Hero from './components/Hero';
 import Layanan from './components/Layanan';
 import CaraKerja from './components/CaraKerja';
@@ -19,6 +20,7 @@ export default function App() {
         <FormPesan />
       </main>
       <BottomNav />
+      <WhatsAppButton />
       <Footer />
     </div>
   );
