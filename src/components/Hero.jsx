@@ -280,7 +280,7 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 w-full px-6 sm:px-10 lg:px-12 xl:px-16 pt-24 md:pt-28 pb-12 md:pb-16">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-6 items-center">
+        <div className="grid lg:grid-cols-2 gap-2 lg:gap-6 items-center">
           {/* Left - Text */}
           <div className="text-center lg:text-left">
             <div className="hero-badge inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-4">
@@ -298,11 +298,11 @@ export default function Hero() {
               <span className="text-text-heading">Sekolah & Kuliah</span>
             </h1>
 
-            <p className="hero-sub text-sm sm:text-base text-text-body/80 lg:max-w-lg mx-auto lg:mx-0 mb-6 leading-relaxed">
+            <p className="hero-sub text-sm sm:text-base text-text-body/80 lg:max-w-lg mx-auto lg:mx-0 mb-4 lg:mb-6 leading-relaxed">
               Bantuan tugas IT, matematika, karya ilmiah, desain Canva, jaringan komputer, coding, dan berbagai kebutuhan akademik lainnya.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-2 lg:mb-8">
               <a
                 href="#pesan"
                 onClick={(e) => {
@@ -343,7 +343,7 @@ export default function Hero() {
           </div>
 
           {/* Right - Illustrations */}
-          <div ref={illustrationsRef} className="relative flex flex-col items-center justify-center">
+          <div ref={illustrationsRef} className="relative flex flex-col items-center justify-center -mt-24 lg:mt-0">
             {/* Background glow */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl animate-pulse-glow" />
