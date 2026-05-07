@@ -30,8 +30,8 @@ const services = [
   },
   {
     icon: HiColorSwatch,
-    title: 'Canva / PPT',
-    desc: 'Desain presentasi PowerPoint, poster, infografis, dan karya Canva.',
+    title: 'Design / Canva / PPT',
+    desc: 'Figma, Adobe Family (PS/AI), Canva, PowerPoint, poster, dan desain kreatif lainnya.',
     color: 'from-pink-400 to-rose-600',
     glow: 'group-hover:shadow-pink-400/40',
   },

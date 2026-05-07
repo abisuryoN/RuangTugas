@@ -9,7 +9,7 @@ const jenisOptions = [
   'IT / Pemrograman',
   'Matematika',
   'Proposal / Laporan',
-  'Canva / PPT',
+  'Design / Canva / PPT',
   'Network / Jaringan',
   'Tugas SMA',
   'Tugas SMK',
