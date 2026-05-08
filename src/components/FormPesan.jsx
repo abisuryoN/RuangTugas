@@ -32,6 +32,7 @@ export default function FormPesan() {
   });
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState(null); // { type: 'success' | 'error', message: '' }
+  const [waError, setWaError] = useState('');
 
   useEffect(() => {
     // Entrance animations removed so content appears immediately
@@ -46,7 +47,22 @@ export default function FormPesan() {
   }, [toast]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    let { name, value } = e.target;
+    
+    // Hanya izinkan angka untuk nomor WhatsApp dan validasi real-time
+    if (name === 'whatsapp') {
+      value = value.replace(/\D/g, '');
+      
+      if (value.length > 0 && value.length < 10) {
+        setWaError('Nomor terlalu pendek (minimal 10 angka)');
+      } else if (value.length > 13) {
+        setWaError('Nomor terlalu panjang (maksimal 13 angka)');
+      } else {
+        setWaError('');
+      }
+    }
+    
+    setForm({ ...form, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -55,6 +71,12 @@ export default function FormPesan() {
     // Validation
     if (!form.nama || !form.whatsapp || !form.jenis || !form.deskripsi || !form.deadline) {
       setToast({ type: 'error', message: 'Harap isi semua field yang diperlukan.' });
+      return;
+    }
+
+    if (form.whatsapp.length < 10 || form.whatsapp.length > 13) {
+      setWaError(form.whatsapp.length < 10 ? 'Nomor terlalu pendek (minimal 10 angka)' : 'Nomor terlalu panjang (maksimal 13 angka)');
+      setToast({ type: 'error', message: 'Nomor WhatsApp tidak valid.' });
       return;
     }
 
@@ -150,17 +172,26 @@ export default function FormPesan() {
                   Nomor WhatsApp
                 </label>
                 <div className="relative">
-                  <HiPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                  <HiPhone className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${waError ? 'text-red-500' : 'text-text-muted'}`} />
                   <input
                     type="tel"
                     id="whatsapp"
                     name="whatsapp"
                     value={form.whatsapp}
                     onChange={handleChange}
-                    placeholder="Contoh: 6281234567890"
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-blue-50/50 border border-blue-100 text-sm text-text-heading placeholder:text-text-muted/60 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all duration-300"
+                    placeholder="Contoh: 086789889876"
+                    className={`w-full pl-11 pr-4 py-3.5 rounded-xl text-sm placeholder:text-text-muted/60 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                      waError 
+                        ? 'bg-red-50 border-2 border-red-500 text-red-700 focus:ring-red-500/40 focus:border-red-500' 
+                        : 'bg-blue-50/50 border border-blue-100 text-text-heading focus:ring-primary/40 focus:border-primary'
+                    }`}
                   />
                 </div>
+                {waError && (
+                  <p className="mt-1.5 ml-1 text-xs text-red-500 font-medium animate-toast-in">
+                    * {waError}
+                  </p>
+                )}
               </div>
 
               {/* Jenis Tugas */}

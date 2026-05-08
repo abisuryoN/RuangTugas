@@ -24,7 +24,7 @@ const services = [
   {
     icon: HiDocumentText,
     title: 'Proposal / Laporan',
-    desc: 'Karya ilmiah, proposal, makalah, skripsi, dan laporan akademik.',
+    desc: 'Karya ilmiah, proposal, makalah, dan laporan akademik.',
     color: 'from-amber-400 to-orange-500',
     glow: 'group-hover:shadow-amber-400/40',
   },

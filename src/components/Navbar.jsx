@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const navLinks = [
   { label: 'Home', href: '#home' },
+  { label: 'Brosur', href: '#brosur' },
   { label: 'Layanan', href: '#layanan' },
   { label: 'Cara Kerja', href: '#cara-kerja' },
   { label: 'Keunggulan', href: '#keunggulan' },
@@ -48,9 +49,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2 group" onClick={(e) => handleNavClick(e, '#home')}>
-            <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary to-primary-deeper flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-primary/50 transition-shadow duration-300">
-              <span className="text-white font-bold text-lg">R</span>
-            </div>
+            <img src="/logo.jpg" alt="Logo Ruang Tugas" className="w-9 h-9 md:w-10 md:h-10 rounded-xl object-cover shadow-sm group-hover:shadow-md transition-shadow duration-300" />
             <span className="font-heading text-lg md:text-xl font-bold text-text-heading">
               Ruang<span className="text-primary-dark">Tugas</span>
             </span>

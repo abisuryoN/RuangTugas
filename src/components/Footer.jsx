@@ -30,9 +30,7 @@ export default function Footer() {
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
-                  <span className="text-white font-bold text-lg">R</span>
-                </div>
+                <img src="/logo.jpg" alt="Logo Ruang Tugas" className="w-10 h-10 rounded-xl object-cover shadow-sm" />
                 <span className="text-xl font-bold">
                   Ruang<span className="text-primary">Tugas</span>
                 </span>
@@ -48,17 +46,24 @@ export default function Footer() {
                 Navigasi
               </h4>
               <ul className="space-y-3">
-                {['Home', 'Layanan', 'Cara Kerja', 'Keunggulan', 'Pesan'].map((link) => (
-                  <li key={link}>
+                {[
+                  { label: 'Home', href: '#home' },
+                  { label: 'Brosur', href: '#brosur' },
+                  { label: 'Layanan', href: '#layanan' },
+                  { label: 'Cara Kerja', href: '#cara-kerja' },
+                  { label: 'Keunggulan', href: '#keunggulan' },
+                  { label: 'Pesan', href: '#pesan' }
+                ].map((link) => (
+                  <li key={link.href}>
                     <a
-                      href={`#${link.toLowerCase().replace(' ', '-')}`}
+                      href={link.href}
                       onClick={(e) => {
                         e.preventDefault();
-                        document.querySelector(`#${link.toLowerCase().replace(' ', '-')}`)?.scrollIntoView({ behavior: 'smooth' });
+                        document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
                       }}
                       className="text-sm text-blue-200/60 hover:text-white transition-colors duration-200"
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 ))}

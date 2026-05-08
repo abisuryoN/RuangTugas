@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import BottomNav from './components/BottomNav';
 import WhatsAppButton from './components/WhatsAppButton';
 import Hero from './components/Hero';
+import Brosur from './components/Brosur';
 import Layanan from './components/Layanan';
 import CaraKerja from './components/CaraKerja';
 import Keunggulan from './components/Keunggulan';
@@ -16,6 +17,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <Brosur />
         <Layanan />
         <CaraKerja />
         <Keunggulan />

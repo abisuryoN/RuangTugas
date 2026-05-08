@@ -1,7 +1,8 @@
-import { HiHome, HiBriefcase, HiSparkles, HiPaperAirplane, HiRefresh } from 'react-icons/hi';
+import { HiBriefcase, HiHome, HiPaperAirplane, HiRefresh, HiSparkles, HiPhotograph } from 'react-icons/hi';
 
 const bottomLinks = [
   { label: 'Home', href: '#home', icon: HiHome },
+  { label: 'Brosur', href: '#brosur', icon: HiPhotograph },
   { label: 'Layanan', href: '#layanan', icon: HiBriefcase },
   { label: 'Cara Kerja', href: '#cara-kerja', icon: HiRefresh },
   { label: 'Keunggulan', href: '#keunggulan', icon: HiSparkles },
@@ -26,7 +27,7 @@ export default function BottomNav() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="flex flex-col items-center gap-1 group min-w-[60px]"
+              className="flex flex-col items-center gap-1 group min-w-[50px]"
             >
               <div className="p-1.5 rounded-xl group-hover:bg-blue-50 transition-colors duration-300">
                 <link.icon className="text-xl text-text-body group-hover:text-primary transition-colors duration-300" />
