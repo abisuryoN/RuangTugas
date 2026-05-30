@@ -1,5 +1,6 @@
 import { FaWhatsapp } from 'react-icons/fa';
 import { HiArrowRight } from 'react-icons/hi';
+import WaveDivider from './WaveDivider';
 
 const WA_LINK = 'https://wa.me/6285719630624?text=Halo%20Surgency%20Studio%2C%20saya%20ingin%20konsultasi%20layanan.';
 
@@ -38,7 +39,7 @@ export default function Hero() {
                 href={WA_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-deeper px-6 py-3 text-sm font-bold text-white shadow-lg shadow-primary/30 transition hover:-translate-y-0.5 hover:bg-[#0b4ee6] hover:shadow-primary/40"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-dark px-6 py-3 text-sm font-bold text-white shadow-[0_14px_28px_rgba(9,19,68,0.18)] transition hover:-translate-y-0.5 hover:bg-primary hover:shadow-[0_16px_32px_rgba(5,66,201,0.22)]"
               >
                 <FaWhatsapp className="text-lg" />
                 Konsultasi Sekarang
@@ -49,7 +50,7 @@ export default function Hero() {
                   e.preventDefault();
                   document.querySelector('#layanan')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-primary-deeper bg-white px-6 py-3 text-sm font-bold text-primary-deeper transition hover:-translate-y-0.5 hover:bg-blue-50"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-primary bg-white px-6 py-3 text-sm font-bold text-primary transition hover:-translate-y-0.5 hover:bg-secondary"
               >
                 Lihat Layanan
                 <HiArrowRight className="text-lg" />
@@ -59,7 +60,7 @@ export default function Hero() {
 
           <div className="relative mx-auto flex min-h-[300px] w-full max-w-lg items-center justify-start lg:min-h-[440px] lg:max-w-none">
             <div
-              className="absolute right-[-46%] top-[-8%] h-[350px] w-[350px] bg-[#06185f] sm:right-[-24%] sm:h-[420px] sm:w-[420px] lg:right-[-18%] lg:top-[-8%] lg:h-[520px] lg:w-[520px] xl:right-[-12%] xl:h-[590px] xl:w-[590px]"
+              className="absolute right-[-46%] top-[-8%] h-[350px] w-[350px] bg-primary-dark sm:right-[-24%] sm:h-[420px] sm:w-[420px] lg:right-[-18%] lg:top-[-8%] lg:h-[520px] lg:w-[520px] xl:right-[-12%] xl:h-[590px] xl:w-[590px]"
               style={{
                 borderRadius: '50% 50% 0 50%',
                 clipPath: 'polygon(18% 0, 100% 0, 100% 100%, 38% 100%, 0 62%, 0 31%)',
@@ -75,11 +76,12 @@ export default function Hero() {
                   />
                 </div>
               </div>
-              <div className="absolute -right-8 top-[60%] h-16 w-16 -translate-y-1/2 rounded-full bg-[#0b55f5] shadow-2xl shadow-primary/30 sm:-right-10 sm:h-20 sm:w-20 lg:-right-12 lg:h-24 lg:w-24" />
+              <div className="absolute -right-8 top-[60%] h-16 w-16 -translate-y-1/2 rounded-full bg-primary shadow-2xl shadow-primary/30 sm:-right-10 sm:h-20 sm:w-20 lg:-right-12 lg:h-24 lg:w-24" />
             </div>
           </div>
         </div>
       </div>
+      <WaveDivider topColor="#ffffff" bottomColor="#eef4ff" variant="simple" />
     </section>
   );
 }

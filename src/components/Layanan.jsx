@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { HiAcademicCap, HiColorSwatch, HiDesktopComputer } from 'react-icons/hi';
+import WaveDivider from './WaveDivider';
 
 const eduServices = [
   'Pendampingan materi',
@@ -48,10 +49,7 @@ const services = [
     tagline: 'Pendampingan Akademik',
     desc: 'Pendampingan akademik untuk riset, struktur, perapihan dokumen, dan pemahaman materi agar hasil lebih terarah.',
     list: eduServices,
-    color: 'from-blue-500 to-indigo-600',
-    bgGlow: 'bg-blue-50',
-    borderColor: 'border-blue-100',
-    iconBg: 'bg-gradient-to-br from-blue-500 to-indigo-600',
+    accent: 'bg-[#0542c9]',
   },
   {
     icon: HiColorSwatch,
@@ -59,10 +57,7 @@ const services = [
     tagline: 'Desain & Konten Kreatif',
     desc: 'Layanan desain dan konten kreatif untuk kebutuhan visual, promosi, personal branding, dan media sosial.',
     list: creativeServices,
-    color: 'from-pink-500 to-rose-600',
-    bgGlow: 'bg-pink-50',
-    borderColor: 'border-pink-100',
-    iconBg: 'bg-gradient-to-br from-pink-500 to-rose-600',
+    accent: 'bg-[#123a92]',
   },
   {
     icon: HiDesktopComputer,
@@ -70,14 +65,11 @@ const services = [
     tagline: 'Solusi Digital',
     desc: 'Solusi digital untuk website, coding, UI, dan project online yang modern, responsif, serta mudah dikembangkan.',
     list: digitalServices,
-    color: 'from-emerald-500 to-teal-600',
-    bgGlow: 'bg-emerald-50',
-    borderColor: 'border-emerald-100',
-    iconBg: 'bg-gradient-to-br from-emerald-500 to-teal-600',
+    accent: 'bg-[#091344]',
   },
 ];
 
-function ServiceList({ items, color }) {
+function ServiceList({ items }) {
   const [showAll, setShowAll] = useState(false);
   const visibleItems = showAll ? items : items.slice(0, 4);
   const hasMore = items.length > 4;
@@ -88,9 +80,9 @@ function ServiceList({ items, color }) {
         {visibleItems.map((item, i) => (
           <span
             key={i}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-50 text-[11px] md:text-xs font-medium text-text-heading border border-blue-100"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white text-[11px] md:text-xs font-medium text-text-heading border border-[rgba(5,66,201,0.15)]"
           >
-            <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${color} flex-shrink-0`} />
+            <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
             {item}
           </span>
         ))}
@@ -109,10 +101,10 @@ function ServiceList({ items, color }) {
 
 export default function Layanan() {
   return (
-    <section id="layanan" className="relative bg-secondary/50">
+    <section id="layanan" className="relative bg-secondary">
       <div className="w-full px-6 sm:px-10 lg:px-12 xl:px-16 py-14 md:py-20">
         <div className="layanan-title text-center max-w-xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-blue-100 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[rgba(5,66,201,0.15)] mb-3">
             <span className="text-[11px] font-semibold text-primary-dark tracking-wide uppercase">Layanan Kami</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-extrabold mb-3 tracking-tight text-text-heading">
@@ -129,11 +121,11 @@ export default function Layanan() {
             return (
               <article
                 key={i}
-                className={`service-card group relative p-5 md:p-6 rounded-2xl bg-white border ${svc.borderColor} shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col`}
+                className="service-card group relative p-5 md:p-6 rounded-[24px] bg-white border border-[rgba(9,19,68,0.08)] shadow-[0_18px_45px_rgba(9,19,68,0.06)] hover:shadow-[0_22px_55px_rgba(9,19,68,0.10)] hover:-translate-y-1 transition-all duration-300 flex flex-col"
               >
                 {/* Icon Header */}
                 <div className="flex items-start gap-4 mb-4">
-                  <div className={`${svc.iconBg} w-12 h-12 rounded-xl flex items-center justify-center shadow-md flex-shrink-0`}>
+                  <div className={`${svc.accent} w-12 h-12 rounded-xl flex items-center justify-center shadow-md flex-shrink-0`}>
                     <Icon className="text-white text-xl" />
                   </div>
                   <div>
@@ -149,7 +141,7 @@ export default function Layanan() {
 
                 {/* Service list */}
                 <div className="mt-auto">
-                  <ServiceList items={svc.list} color={svc.color} />
+                  <ServiceList items={svc.list} />
                 </div>
 
                 {/* CTA */}
@@ -157,17 +149,18 @@ export default function Layanan() {
                   href={WA_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`mt-4 w-full text-center py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r ${svc.color} text-white shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300`}
+                  className="mt-4 w-full text-center py-2.5 rounded-xl text-sm font-semibold bg-primary-dark text-white shadow-[0_12px_24px_rgba(9,19,68,0.18)] hover:bg-primary hover:shadow-[0_14px_28px_rgba(5,66,201,0.22)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
                 >
                   Konsultasi Layanan
                 </a>
 
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 rounded-[24px] bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </article>
             );
           })}
         </div>
       </div>
+      <WaveDivider topColor="#eef4ff" bottomColor="#ffffff" variant="simple" />
     </section>
   );
 }

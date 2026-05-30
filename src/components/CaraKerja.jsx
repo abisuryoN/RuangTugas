@@ -12,35 +12,35 @@ const steps = [
     step: '01',
     title: 'Kirim Brief',
     desc: 'Ceritakan kebutuhan, layanan yang dipilih, dan deadline yang diinginkan.',
-    color: 'from-blue-400 to-blue-600',
+    tone: 'bg-primary-dark',
   },
   {
     icon: HiPaperAirplane,
     step: '02',
     title: 'Brief Terkirim',
     desc: 'Kebutuhan Anda langsung masuk ke WhatsApp tim Surgency Studio.',
-    color: 'from-cyan-400 to-blue-500',
+    tone: 'bg-primary',
   },
   {
     icon: HiChatAlt2,
     step: '03',
     title: 'Konfirmasi Detail',
     desc: 'Admin akan menghubungi Anda untuk memastikan scope dan estimasi.',
-    color: 'from-violet-400 to-purple-500',
+    tone: 'bg-[#123a92]',
   },
   {
     icon: HiCog,
     step: '04',
     title: 'Tim Memproses',
     desc: 'Tim kami mengolah kebutuhan dengan teliti dan profesional.',
-    color: 'from-indigo-400 to-blue-600',
+    tone: 'bg-primary-dark',
   },
   {
     icon: HiCheckCircle,
     step: '05',
     title: 'Hasil Dikirim',
     desc: 'Output dikirim sesuai kesepakatan. Revisi tersedia jika diperlukan.',
-    color: 'from-emerald-400 to-teal-500',
+    tone: 'bg-primary',
   },
 ];
 
@@ -130,9 +130,9 @@ export default function CaraKerja() {
 
                 {/* Step number container */}
                 <div className="relative inline-flex items-center justify-center mb-6">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${step.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
+                  <div className="absolute inset-0 bg-primary rounded-3xl blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-500" />
                   
-                  <div className={`relative w-20 h-20 rounded-3xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-400 z-10`}>
+                  <div className={`relative w-20 h-20 rounded-3xl ${step.tone} flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-400 z-10`}>
                     <Icon className={`text-white text-3xl ${Icon === HiPaperAirplane ? 'rotate-90' : ''}`} />
                   </div>
                   
@@ -154,7 +154,7 @@ export default function CaraKerja() {
       </div>
 
       {/* Wave Divider */}
-      <WaveDivider topColor="#FFFFFF" bottomColor="#DBEAFE" variant="layered" />
+      <WaveDivider topColor="#FFFFFF" bottomColor="#eef4ff" variant="layered" />
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
+import WaveDivider from './WaveDivider';
 
 const testimonials = [
   {
@@ -8,7 +9,7 @@ const testimonials = [
     quote: 'Surgency Studio sangat membantu! Coding akademik Java yang tadinya bikin pusing jadi lebih mudah dipahami. Servis cepat dan hasilnya rapi.',
     rating: 5,
     avatar: 'RM',
-    color: 'from-blue-500 to-indigo-600',
+    tone: 'bg-primary',
   },
   {
     name: 'Dimas Pratama',
@@ -16,7 +17,7 @@ const testimonials = [
     quote: 'Feed Instagram brand aku sekarang keliatan lebih profesional. Desainya clean dan konsisten. Recommended banget untuk kebutuhan kreatif!',
     rating: 5,
     avatar: 'DP',
-    color: 'from-pink-500 to-rose-600',
+    tone: 'bg-[#123a92]',
   },
   {
     name: 'Siti Nurhaliza',
@@ -24,7 +25,7 @@ const testimonials = [
     quote: 'Landing page untuk tugas akhir portfolio aku jadi keliatan modern dan responsif. Proses revisinya juga fleksibel dan sabar. Terima kasih!',
     rating: 5,
     avatar: 'SN',
-    color: 'from-emerald-500 to-teal-600',
+    tone: 'bg-primary-dark',
   },
   {
     name: 'Ahmad Fauzi',
@@ -32,7 +33,7 @@ const testimonials = [
     quote: 'Analisis studi kasus manajemen proyek aku disusun rapih dari awal sampai akhir. Penjelasannya detail dan mudah dipahami. Mantap!',
     rating: 5,
     avatar: 'AF',
-    color: 'from-amber-400 to-orange-500',
+    tone: 'bg-primary',
   },
   {
     name: 'Putri Amelia',
@@ -40,7 +41,7 @@ const testimonials = [
     quote: 'Video konten promosi untuk tugas kampus hasilnya keren banget! Cutting, transisi, dan musik udah pas. Profisiensi tinggi dan tepat waktu.',
     rating: 5,
     avatar: 'PA',
-    color: 'from-violet-500 to-purple-600',
+    tone: 'bg-[#123a92]',
   },
   {
     name: 'Bagus Setiawan',
@@ -48,7 +49,7 @@ const testimonials = [
     quote: 'Bantuan tugas web development React/Vite aku kerjakan bareng tim Surgency. Kode-nya rapi, dokumentasinya jelas. Worth it banget!',
     rating: 5,
     avatar: 'BS',
-    color: 'from-cyan-500 to-blue-600',
+    tone: 'bg-primary-dark',
   },
 ];
 
@@ -59,7 +60,7 @@ function StarRating({ rating }) {
         <FaStar
           key={i}
           size={11}
-          className={i < rating ? 'text-amber-400' : 'text-gray-200'}
+          className={i < rating ? 'text-primary' : 'text-gray-200'}
         />
       ))}
     </div>
@@ -73,11 +74,11 @@ export default function Testimoni() {
   const next = () => setActiveIndex(i => (i + 1) % testimonials.length);
 
   return (
-    <section id="testimoni" className="relative bg-secondary/50">
+    <section id="testimoni" className="relative bg-secondary">
       <div className="w-full px-6 sm:px-10 lg:px-12 xl:px-16 py-14 md:py-20">
         {/* Header */}
         <div className="text-center max-w-xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-blue-100 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[rgba(5,66,201,0.15)] mb-3">
             <span className="text-[11px] font-semibold text-primary-dark tracking-wide uppercase">Testimoni</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-extrabold mb-3 tracking-tight text-text-heading">
@@ -97,9 +98,9 @@ export default function Testimoni() {
             >
               {testimonials.map((t, i) => (
                 <div key={i} className="w-full flex-shrink-0 px-1">
-                  <div className="p-6 md:p-8 rounded-2xl bg-white border border-blue-50 shadow-md text-center">
+                  <div className="p-6 md:p-8 rounded-[24px] bg-white border border-[rgba(9,19,68,0.08)] shadow-[0_18px_45px_rgba(9,19,68,0.08)] text-center">
                     {/* Avatar */}
-                    <div className={`w-14 h-14 mx-auto mb-4 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-bold text-lg shadow-md`}>
+                    <div className={`w-14 h-14 mx-auto mb-4 rounded-full ${t.tone} flex items-center justify-center text-white font-bold text-lg shadow-md`}>
                       {t.avatar}
                     </div>
 
@@ -140,7 +141,7 @@ export default function Testimoni() {
                   onClick={() => setActiveIndex(i)}
                   className={`rounded-full transition-all duration-300 ${
                     i === activeIndex
-                      ? 'w-6 h-2.5 bg-gradient-to-r from-primary to-primary-deeper'
+                      ? 'w-6 h-2.5 bg-primary-dark'
                       : 'w-2.5 h-2.5 bg-blue-200 hover:bg-primary/50'
                   }`}
                 />
@@ -161,6 +162,7 @@ export default function Testimoni() {
           </p>
         </div>
       </div>
+      <WaveDivider topColor="#eef4ff" bottomColor="#ffffff" variant="simple" />
     </section>
   );
 }

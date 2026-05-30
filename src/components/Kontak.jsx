@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
+import WaveDivider from './WaveDivider';
 
 const WA_LINK = 'https://wa.me/6285719630624';
 const WA_NUMBER = '085719630624';
@@ -11,7 +12,7 @@ const contactCards = [
     value: WA_NUMBER,
     cta: 'Chat WhatsApp',
     href: WA_LINK,
-    gradient: 'from-emerald-500 to-teal-600',
+    tone: 'bg-primary-dark',
   },
   {
     icon: FaEnvelope,
@@ -19,7 +20,7 @@ const contactCards = [
     value: 'halo@surgencystudio.com',
     cta: 'Kirim Email',
     href: 'mailto:halo@surgencystudio.com',
-    gradient: 'from-blue-500 to-indigo-600',
+    tone: 'bg-primary',
   },
   {
     icon: FaMapMarkerAlt,
@@ -27,7 +28,7 @@ const contactCards = [
     value: 'Indonesia',
     cta: 'Konsultasi Online',
     href: WA_LINK,
-    gradient: 'from-pink-500 to-rose-600',
+    tone: 'bg-[#123a92]',
   },
 ];
 
@@ -62,11 +63,11 @@ Kebutuhan: ${form.kebutuhan}`;
   };
 
   return (
-    <section id="kontak" className="relative bg-secondary/50">
+    <section id="kontak" className="relative bg-secondary">
       <div className="w-full px-6 sm:px-10 lg:px-12 xl:px-16 py-14 md:py-20">
         {/* Header */}
         <div className="text-center max-w-xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-blue-100 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[rgba(5,66,201,0.15)] mb-3">
             <span className="text-[11px] font-semibold text-primary-dark tracking-wide uppercase">Hubungi Kami</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-extrabold mb-3 tracking-tight text-text-heading">
@@ -84,9 +85,9 @@ Kebutuhan: ${form.kebutuhan}`;
             return (
               <div
                 key={i}
-                className="p-5 rounded-2xl bg-white border border-blue-50 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 text-center"
+                className="p-5 rounded-[22px] bg-white border border-[rgba(9,19,68,0.08)] shadow-[0_14px_35px_rgba(9,19,68,0.06)] hover:shadow-[0_18px_45px_rgba(9,19,68,0.10)] hover:-translate-y-0.5 transition-all duration-300 text-center"
               >
-                <div className={`w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center shadow-md`}>
+                <div className={`w-12 h-12 mx-auto mb-3 rounded-xl ${card.tone} flex items-center justify-center shadow-md`}>
                   <Icon className="text-white text-lg" />
                 </div>
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-text-muted mb-1">{card.label}</p>
@@ -95,7 +96,7 @@ Kebutuhan: ${form.kebutuhan}`;
                   href={card.href}
                   target={card.href.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center justify-center gap-2 w-full py-2 rounded-xl text-xs font-semibold bg-gradient-to-r ${card.gradient} text-white shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300`}
+                  className="inline-flex items-center justify-center gap-2 w-full py-2 rounded-xl text-xs font-semibold bg-primary-dark text-white shadow-[0_10px_22px_rgba(9,19,68,0.16)] hover:bg-primary hover:shadow-[0_12px_26px_rgba(5,66,201,0.20)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
                 >
                   {card.cta}
                 </a>
@@ -106,7 +107,7 @@ Kebutuhan: ${form.kebutuhan}`;
 
         {/* Contact Form */}
         <div className="max-w-xl mx-auto">
-          <div className="p-6 sm:p-8 rounded-2xl bg-white border border-blue-100 shadow-md">
+          <div className="p-6 sm:p-8 rounded-[24px] bg-white border border-[rgba(9,19,68,0.08)] shadow-[0_18px_45px_rgba(9,19,68,0.08)]">
             <h3 className="text-lg font-bold text-text-heading mb-1 text-center">Kirim Pesan via WhatsApp</h3>
             <p className="text-xs text-text-muted text-center mb-6">Isi form di bawah dan akan terbuka otomatis di WhatsApp</p>
 
@@ -167,7 +168,7 @@ Kebutuhan: ${form.kebutuhan}`;
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                className="w-full flex items-center justify-center gap-2 py-3 bg-primary-dark text-white font-bold text-sm rounded-xl shadow-[0_14px_28px_rgba(9,19,68,0.18)] hover:bg-primary hover:shadow-[0_16px_32px_rgba(5,66,201,0.22)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               >
                 <FaPaperPlane className="text-base" />
                 Kirim via WhatsApp
@@ -176,6 +177,7 @@ Kebutuhan: ${form.kebutuhan}`;
           </div>
         </div>
       </div>
+      <WaveDivider topColor="#eef4ff" bottomColor="#091344" variant="simple" />
     </section>
   );
 }

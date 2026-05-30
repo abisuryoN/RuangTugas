@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
+import WaveDivider from './WaveDivider';
 
 const faqs = [
   {
@@ -38,7 +39,7 @@ const faqs = [
 
 function FAQItem({ faq, isOpen, onToggle }) {
   return (
-    <div className="border border-blue-100 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div className="border border-[rgba(9,19,68,0.08)] rounded-[18px] overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left group"
@@ -73,7 +74,7 @@ export default function FAQ() {
       <div className="w-full px-6 sm:px-10 lg:px-12 xl:px-16 py-14 md:py-20">
         {/* Header */}
         <div className="text-center max-w-xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-[rgba(5,66,201,0.15)] mb-3">
             <span className="text-[11px] font-semibold text-primary-dark tracking-wide uppercase">FAQ</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-extrabold mb-3 tracking-tight text-text-heading">
@@ -96,6 +97,7 @@ export default function FAQ() {
           ))}
         </div>
       </div>
+      <WaveDivider topColor="#ffffff" bottomColor="#eef4ff" variant="simple" />
     </section>
   );
 }

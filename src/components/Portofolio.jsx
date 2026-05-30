@@ -7,7 +7,7 @@ const portfolioItems = [
   {
     category: 'Edu',
     icon: HiAcademicCap,
-    color: 'from-blue-500 to-indigo-600',
+    tone: 'bg-primary',
     items: [
       { title: 'Pendampingan Tugas Algoritma', desc: 'Membantu memahami alur soal, penyusunan jawaban, dan perapihan hasil akhir.' },
       { title: 'Analisis Studi Kasus Manajemen Proyek', desc: 'Penyusunan pembahasan, struktur jawaban, dan ringkasan presentasi.' },
@@ -17,7 +17,7 @@ const portfolioItems = [
   {
     category: 'Creative',
     icon: HiColorSwatch,
-    color: 'from-pink-500 to-rose-600',
+    tone: 'bg-[#123a92]',
     items: [
       { title: 'Desain Feed Instagram Brand', desc: 'Membuat visual feed yang clean, konsisten, dan siap posting.' },
       { title: 'Video Konten Promosi', desc: 'Editing konten pendek untuk kebutuhan Reels, TikTok, dan promosi digital.' },
@@ -27,7 +27,7 @@ const portfolioItems = [
   {
     category: 'Digital',
     icon: HiDesktopComputer,
-    color: 'from-emerald-500 to-teal-600',
+    tone: 'bg-primary-dark',
     items: [
       { title: 'Website Landing Page', desc: 'Membuat landing page responsif untuk promosi jasa atau bisnis.' },
       { title: 'Website Company Profile', desc: 'Website modern untuk memperkenalkan brand, layanan, dan kontak bisnis.' },
@@ -50,7 +50,7 @@ export default function Portofolio() {
       <div className="w-full px-6 sm:px-10 lg:px-12 xl:px-16 py-14 md:py-20">
         {/* Header */}
         <div className="text-center max-w-xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-[rgba(5,66,201,0.15)] mb-3">
             <span className="text-[11px] font-semibold text-primary-dark tracking-wide uppercase">Hasil Kerja</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-extrabold mb-3 tracking-tight text-text-heading">
@@ -69,8 +69,8 @@ export default function Portofolio() {
               onClick={() => setActiveFilter(f)}
               className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${
                 activeFilter === f
-                  ? 'bg-gradient-to-r from-primary to-primary-deeper text-white shadow-md'
-                  : 'bg-white border border-blue-100 text-text-body hover:bg-blue-50'
+                  ? 'bg-primary-dark text-white shadow-md'
+                  : 'bg-white border border-[rgba(5,66,201,0.15)] text-text-body hover:bg-secondary'
               }`}
             >
               {f}
@@ -85,11 +85,11 @@ export default function Portofolio() {
             return group.items.map((item, idx) => (
               <div
                 key={`${group.category}-${idx}`}
-                className="relative p-5 rounded-xl bg-white border border-blue-50 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                className="relative p-5 rounded-[20px] bg-white border border-[rgba(9,19,68,0.08)] shadow-[0_14px_35px_rgba(9,19,68,0.06)] hover:shadow-[0_18px_45px_rgba(9,19,68,0.10)] hover:-translate-y-1 transition-all duration-300 flex flex-col"
               >
                 {/* Category Badge */}
                 <div className="flex items-center justify-between mb-3">
-                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gradient-to-r ${group.color} text-white`}>
+                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold ${group.tone} text-white`}>
                     <Icon className="text-xs" />
                     {group.category}
                   </span>

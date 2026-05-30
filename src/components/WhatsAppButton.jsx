@@ -18,8 +18,8 @@ export default function WhatsAppButton() {
       </div>
 
       <div className="relative">
-        <div className="absolute inset-0 rounded-full bg-emerald-500 opacity-40 blur-lg transition-opacity group-hover:opacity-60" />
-        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-xl shadow-emerald-500/30 transition-all duration-300 hover:scale-110 hover:shadow-emerald-500/50 active:scale-95 md:h-16 md:w-16">
+        <div className="absolute inset-0 rounded-full bg-primary opacity-30 blur-lg transition-opacity group-hover:opacity-45" />
+        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-primary-dark text-white shadow-xl shadow-[rgba(9,19,68,0.24)] transition-all duration-300 hover:scale-110 hover:bg-primary hover:shadow-[rgba(5,66,201,0.28)] active:scale-95 md:h-16 md:w-16">
           <FaWhatsapp className="text-3xl md:text-4xl" />
           <span className="absolute right-0 top-0 flex h-4 w-4">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
