@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 const navLinks = [
   { label: 'Beranda', href: '#beranda' },
   { label: 'Layanan', href: '#layanan' },
+  { label: 'Paket', href: '#paket' },
   { label: 'Portofolio', href: '#portofolio' },
   { label: 'Testimoni', href: '#testimoni' },
   { label: 'FAQ', href: '#faq' },
@@ -50,7 +51,7 @@ export default function Navbar() {
               />
             </div>
             <span className="font-heading text-lg md:text-xl font-bold text-text-heading">
-              Surgency <span className="text-primary-dark">Studio</span>
+              Surgency <span className="text-primary">Studio</span>
             </span>
           </a>
 

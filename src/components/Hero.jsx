@@ -14,7 +14,7 @@ export default function Hero() {
           <div className="max-w-xl text-center lg:text-left">
             <h1 className="font-heading text-[3.15rem] font-extrabold leading-[0.9] tracking-normal text-text-heading sm:text-6xl lg:text-[4.6rem] xl:text-[5.05rem]">
               Surgency
-              <span className="block">Studio</span>
+              <span className="block text-primary">Studio</span>
             </h1>
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xl font-extrabold text-primary-deeper sm:text-2xl lg:justify-start">

@@ -27,16 +27,17 @@ export default function Brosur() {
     <section id="brosur" className="relative overflow-hidden bg-secondary">
       <div className="w-full px-5 sm:px-8 lg:px-12 xl:px-16 py-12 md:py-16">
         <div className="mx-auto grid max-w-6xl items-center gap-8 rounded-[28px] border border-[rgba(9,19,68,0.08)] bg-white p-5 shadow-[0_18px_55px_rgba(9,19,68,0.08)] sm:p-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[24px] bg-primary-dark p-6 text-white sm:p-8">
+          <div className="brand-panel rounded-[24px] bg-primary-dark p-6 text-white sm:p-8">
             <img
               src="/surgency-01.png"
               alt="Surgency Studio"
-              className="h-16 w-auto rounded-xl bg-white p-2"
+              className="h-20 w-auto rounded-xl bg-white p-2 shadow-[0_12px_28px_rgba(0,0,0,0.12)]"
             />
-            <h2 className="mt-8 text-3xl font-extrabold leading-tight sm:text-4xl">
+            <div className="mt-7 h-1.5 w-16 rounded-full bg-primary" />
+            <h2 className="mt-4 max-w-lg text-3xl font-black leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.22)] sm:text-4xl">
               Solusi lengkap untuk kebutuhan Anda
             </h2>
-            <p className="mt-4 text-sm leading-7 text-white/75">
+            <p className="mt-4 max-w-md text-sm font-semibold leading-7 text-white/90">
               Satu studio untuk dukungan akademik, desain kreatif, dan solusi
               digital. Konsultasikan brief, deadline, dan target output Anda.
             </p>

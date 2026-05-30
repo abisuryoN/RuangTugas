@@ -33,11 +33,11 @@ const digitalServices = [
   'Company profile',
   'Web UMKM',
   'Personal branding site',
-  'React / Vite',
-  'Laravel support',
-  'Database',
-  'UI basic',
-  'Deployment',
+  'Toko online',
+  'Portofolio online',
+  'Dashboard simple',
+  'UI / UX Design',
+  'Maintenance web',
 ];
 
 const WA_LINK = 'https://wa.me/6285719630624?text=Halo%20Surgency%20Studio%2C%20saya%20ingin%20konsultasi%20layanan.';
@@ -76,7 +76,7 @@ function ServiceList({ items }) {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-1.5 md:gap-2">
+      <div className={`flex flex-wrap content-start gap-1.5 md:gap-2 ${showAll ? 'max-h-[96px] overflow-y-auto pr-1' : 'max-h-[72px] overflow-hidden'}`}>
         {visibleItems.map((item, i) => (
           <span
             key={i}
@@ -90,7 +90,7 @@ function ServiceList({ items }) {
       {hasMore && (
         <button
           onClick={() => setShowAll(!showAll)}
-          className="mt-2 text-[11px] md:text-xs font-semibold text-primary-dark hover:text-primary-deeper transition-colors"
+          className="mt-2 text-[11px] md:text-xs font-semibold text-primary-dark hover:text-primary transition-colors"
         >
           {showAll ? 'Tampilkan lebih sedikit' : `+${items.length - 4} lainnya`}
         </button>
@@ -140,7 +140,7 @@ export default function Layanan() {
                 </p>
 
                 {/* Service list */}
-                <div className="mt-auto">
+                <div className="mt-1">
                   <ServiceList items={svc.list} />
                 </div>
 

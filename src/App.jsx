@@ -5,6 +5,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 import Hero from './components/Hero';
 import Brosur from './components/Brosur';
 import Layanan from './components/Layanan';
+import Pricing from './components/Pricing';
 import Portofolio from './components/Portofolio';
 import Testimoni from './components/Testimoni';
 import FAQ from './components/FAQ';
@@ -19,6 +20,7 @@ export default function App() {
       <main>
         <Hero />
         <Brosur />
+        <Pricing />
         <Layanan />
         <Portofolio />
         <Testimoni />

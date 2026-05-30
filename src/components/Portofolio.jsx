@@ -1,54 +1,82 @@
-import { useState } from 'react';
-import { HiAcademicCap, HiColorSwatch, HiDesktopComputer } from 'react-icons/hi';
+import { useMemo, useState } from 'react';
+import { FaPlay, FaExternalLinkAlt, FaWhatsapp } from 'react-icons/fa';
+import portfolioItems from '../data/portfolio';
+import PortfolioModal from './PortfolioModal';
 
 const WA_LINK = 'https://wa.me/6285719630624';
+const filters = ['Semua', 'Design', 'Video', 'Web'];
 
-const portfolioItems = [
-  {
-    category: 'Edu',
-    icon: HiAcademicCap,
-    tone: 'bg-primary',
-    items: [
-      { title: 'Pendampingan Tugas Algoritma', desc: 'Membantu memahami alur soal, penyusunan jawaban, dan perapihan hasil akhir.' },
-      { title: 'Analisis Studi Kasus Manajemen Proyek', desc: 'Penyusunan pembahasan, struktur jawaban, dan ringkasan presentasi.' },
-      { title: 'Bantuan Coding Akademik Java', desc: 'Membantu debug, merapikan struktur kode, dan menjelaskan alur program.' },
-    ],
-  },
-  {
-    category: 'Creative',
-    icon: HiColorSwatch,
-    tone: 'bg-[#123a92]',
-    items: [
-      { title: 'Desain Feed Instagram Brand', desc: 'Membuat visual feed yang clean, konsisten, dan siap posting.' },
-      { title: 'Video Konten Promosi', desc: 'Editing konten pendek untuk kebutuhan Reels, TikTok, dan promosi digital.' },
-      { title: 'CV dan Portfolio Visual', desc: 'Mendisain CV dan portfolio agar lebih profesional dan menarik.' },
-    ],
-  },
-  {
-    category: 'Digital',
-    icon: HiDesktopComputer,
-    tone: 'bg-primary-dark',
-    items: [
-      { title: 'Website Landing Page', desc: 'Membuat landing page responsif untuk promosi jasa atau bisnis.' },
-      { title: 'Website Company Profile', desc: 'Website modern untuk memperkenalkan brand, layanan, dan kontak bisnis.' },
-      { title: 'UI Website Sederhana', desc: 'Membuat tampilan antarmuka yang clean, rapi, dan mudah digunakan.' },
-    ],
-  },
-];
-
-const filters = ['Semua', 'Edu', 'Creative', 'Digital'];
+const categoryLabel = {
+  Design: 'Lihat Design',
+  Video: 'Putar Video',
+  Web: 'Lihat Preview',
+};
 
 export default function Portofolio() {
   const [activeFilter, setActiveFilter] = useState('Semua');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const filtered = activeFilter === 'Semua'
+  const designItems = useMemo(
+    () => portfolioItems.filter((item) => item.category === 'Design'),
+    [],
+  );
+  const webItems = useMemo(
+    () => portfolioItems.filter((item) => item.category === 'Web'),
+    [],
+  );
+
+  const filteredItems = activeFilter === 'Semua'
     ? portfolioItems
-    : portfolioItems.filter(p => p.category === activeFilter);
+    : portfolioItems.filter((item) => item.category === activeFilter);
+
+  const activeGallery = modalType === 'Design' ? designItems : webItems;
+  const modalItem = modalType === 'Video' ? selectedItem : activeGallery[currentIndex];
+
+  function openPortfolio(item) {
+    if (item.category === 'Design') {
+      const index = designItems.findIndex((project) => project.id === item.id);
+      setModalType('Design');
+      setCurrentIndex(index);
+      setModalOpen(true);
+    }
+
+    if (item.category === 'Video') {
+      setModalType('Video');
+      setSelectedItem(item);
+      setModalOpen(true);
+    }
+
+    if (item.category === 'Web') {
+      const index = webItems.findIndex((project) => project.id === item.id);
+      setModalType('Web');
+      setCurrentIndex(index);
+      setModalOpen(true);
+    }
+  }
+
+  function closeModal() {
+    setModalOpen(false);
+    setModalType(null);
+    setSelectedItem(null);
+    setCurrentIndex(0);
+  }
+
+  function nextSlide() {
+    const gallery = modalType === 'Design' ? designItems : webItems;
+    setCurrentIndex((prev) => (prev + 1) % gallery.length);
+  }
+
+  function prevSlide() {
+    const gallery = modalType === 'Design' ? designItems : webItems;
+    setCurrentIndex((prev) => (prev - 1 + gallery.length) % gallery.length);
+  }
 
   return (
     <section id="portofolio" className="relative bg-white">
       <div className="w-full px-6 sm:px-10 lg:px-12 xl:px-16 py-14 md:py-20">
-        {/* Header */}
         <div className="text-center max-w-xl mx-auto mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-[rgba(5,66,201,0.15)] mb-3">
             <span className="text-[11px] font-semibold text-primary-dark tracking-wide uppercase">Hasil Kerja</span>
@@ -57,64 +85,109 @@ export default function Portofolio() {
             Portofolio
           </h2>
           <p className="text-text-body/70 text-sm sm:text-base leading-relaxed">
-            Beberapa contoh hasil kerja dari layanan Edu, Creative, dan Digital.
+            Gallery hasil Design, Video, dan Web dari Surgency Studio.
           </p>
         </div>
 
-        {/* Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {filters.map((f) => (
+          {filters.map((filter) => (
             <button
-              key={f}
-              onClick={() => setActiveFilter(f)}
+              key={filter}
+              type="button"
+              onClick={() => setActiveFilter(filter)}
               className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${
-                activeFilter === f
+                activeFilter === filter
                   ? 'bg-primary-dark text-white shadow-md'
                   : 'bg-white border border-[rgba(5,66,201,0.15)] text-text-body hover:bg-secondary'
               }`}
             >
-              {f}
+              {filter}
             </button>
           ))}
         </div>
 
-        {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
-          {filtered.map((group) => {
-            const Icon = group.icon;
-            return group.items.map((item, idx) => (
-              <div
-                key={`${group.category}-${idx}`}
-                className="relative p-5 rounded-[20px] bg-white border border-[rgba(9,19,68,0.08)] shadow-[0_14px_35px_rgba(9,19,68,0.06)] hover:shadow-[0_18px_45px_rgba(9,19,68,0.10)] hover:-translate-y-1 transition-all duration-300 flex flex-col"
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
+          {filteredItems.map((item) => (
+            <article
+              key={item.id}
+              className="group flex h-full min-h-[430px] flex-col overflow-hidden rounded-[22px] bg-white border border-[rgba(9,19,68,0.08)] shadow-[0_14px_35px_rgba(9,19,68,0.06)] hover:shadow-[0_18px_45px_rgba(9,19,68,0.10)] transition-all duration-300"
+            >
+              <button
+                type="button"
+                onClick={() => openPortfolio(item)}
+                className="relative block w-full aspect-[16/10] overflow-hidden bg-secondary text-left"
+                aria-label={`Buka ${item.title}`}
               >
-                {/* Category Badge */}
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold ${group.tone} text-white`}>
-                    <Icon className="text-xs" />
-                    {group.category}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute left-3 top-3 rounded-full bg-primary-dark px-3 py-1 text-[10px] font-bold text-white">
+                  {item.category}
+                </span>
+                {item.type === 'video' && (
+                  <span className="absolute inset-0 flex items-center justify-center bg-primary-dark/20">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-primary-dark shadow-lg">
+                      <FaPlay className="ml-1 text-lg" />
+                    </span>
                   </span>
+                )}
+              </button>
+
+              <div className="flex flex-1 flex-col p-5">
+                <h3 className="min-h-[38px] text-sm font-bold text-text-heading leading-tight">
+                  {item.title}
+                </h3>
+                <p className="mt-2 min-h-[40px] text-xs leading-5 text-text-body/70 line-clamp-2">
+                  {item.description}
+                </p>
+
+                <div className="mt-auto flex min-h-[78px] flex-wrap content-end gap-2 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => openPortfolio(item)}
+                    className="inline-flex h-10 flex-1 items-center justify-center rounded-xl bg-primary-dark px-3 text-xs font-bold text-white transition hover:bg-primary"
+                  >
+                    {categoryLabel[item.category]}
+                  </button>
+
+                  {item.category === 'Web' && item.demoUrl && (
+                    <a
+                      href={item.demoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl border border-[rgba(5,66,201,0.22)] bg-white px-3 text-xs font-bold text-primary transition hover:bg-secondary"
+                    >
+                      <FaExternalLinkAlt className="text-[10px]" />
+                      Lihat Demo
+                    </a>
+                  )}
+
+                  <a
+                    href={WA_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-secondary px-3 text-xs font-bold text-primary-dark transition hover:bg-primary hover:text-white"
+                  >
+                    <FaWhatsapp className="text-sm" />
+                    Konsultasi Serupa
+                  </a>
                 </div>
-
-                {/* Title */}
-                <h3 className="text-sm font-bold text-text-heading mb-2 leading-tight">{item.title}</h3>
-
-                {/* Description */}
-                <p className="text-xs text-text-body/70 leading-relaxed flex-1 line-clamp-3">{item.desc}</p>
-
-                {/* CTA */}
-                <a
-                  href={WA_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold bg-blue-50 text-primary-dark hover:bg-primary hover:text-white transition-all duration-300"
-                >
-                  Konsultasi Serupa
-                </a>
               </div>
-            ));
-          })}
+            </article>
+          ))}
         </div>
       </div>
+
+      <PortfolioModal
+        isOpen={modalOpen}
+        modalType={modalType}
+        item={modalItem}
+        onClose={closeModal}
+        onNext={nextSlide}
+        onPrev={prevSlide}
+      />
     </section>
   );
 }
