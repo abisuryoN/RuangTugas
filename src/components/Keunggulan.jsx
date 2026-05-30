@@ -10,21 +10,21 @@ const keunggulan = [
   {
     icon: HiLightningBolt,
     title: 'Fast Response',
-    desc: 'Admin dan tim kami selalu siaga membalas pesan dan mengerjakan tugasmu dengan cepat.',
+    desc: 'Admin dan tim kami selalu siaga membalas pesan dan mengolah kebutuhan Anda dengan cepat.',
     color: 'from-amber-400 to-orange-500',
     glow: 'group-hover:shadow-amber-400/40',
   },
   {
     icon: HiClock,
     title: 'Tepat Deadline',
-    desc: 'Kami menjamin tugas selesai sebelum batas waktu yang kamu tentukan tanpa alasan.',
+    desc: 'Kami menjaga proses tetap sesuai batas waktu yang disepakati.',
     color: 'from-emerald-400 to-teal-500',
     glow: 'group-hover:shadow-emerald-400/40',
   },
   {
     icon: HiCollection,
-    title: 'Banyak Bidang Tugas',
-    desc: 'Mulai dari IT, desain, matematika, hingga karya ilmiah. Kami punya ahli di setiap bidang.',
+    title: 'Banyak Bidang Layanan',
+    desc: 'Mulai dari akademik, IT, desain, konten, hingga website. Kami punya tim di setiap bidang.',
     color: 'from-blue-400 to-indigo-500',
     glow: 'group-hover:shadow-blue-400/40',
   },
@@ -74,10 +74,10 @@ export default function Keunggulan() {
             <span className="text-[11px] font-semibold text-primary-dark tracking-wide uppercase">Keunggulan Kami</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-extrabold mb-4 tracking-tight">
-            <span className="text-text-heading">Kenapa Memilih </span><span className="text-gradient">Ruang Tugas</span>
+            <span className="text-text-heading">Kenapa Memilih </span><span className="text-gradient">Surgency Studio</span>
           </h2>
           <p className="text-text-body/70 text-sm sm:text-base leading-relaxed">
-            Kami berkomitmen memberikan layanan terbaik untuk membantu kesuksesan akademikmu.
+            Kami berkomitmen memberikan layanan terbaik untuk mendukung kebutuhan edukasi, kreatif, dan digital Anda.
           </p>
         </div>
 

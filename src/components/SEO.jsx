@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
 export default function SEO() {
-  const title = "Ruang Tugas | Joki Tugas, Joki Canva, Joki IT & Bantuan Tugas Kuliah";
-  const description = "Ruang Tugas menyediakan bantuan tugas sekolah dan kuliah, mulai dari IT, coding, Canva, matematika, karya ilmiah, jaringan komputer, hingga berbagai kebutuhan akademik lainnya.";
-  const keywords = "joki tugas, joki tugas kuliah, joki tugas sekolah, joki canva, joki IT, joki coding, joki matematika, joki karya ilmiah, joki makalah, joki presentasi, joki jaringan komputer, tugas SMA, tugas SMK";
-  const url = "https://ruangtugas.vercel.app/";
-  const image = "https://ruangtugas.vercel.app/og-image.png"; // Placeholder for an actual image
+  const title = "Surgency Studio | Edu, Creative, Digital";
+  const description = "Surgency Studio adalah partner edukasi, kreatif, dan digital untuk kebutuhan akademik, desain, coding, website, dan branding dengan hasil profesional.";
+  const keywords = "Surgency Studio, layanan akademik, desain kreatif, website, coding, branding digital, desain poster, feed Instagram, UI UX";
+  const url = "https://surgencystudio.com/";
+  const image = "https://surgencystudio.com/surgency-01.png";
 
   // JSON-LD Structured Data
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Ruang Tugas",
+    "name": "Surgency Studio",
     "url": url,
     "logo": image,
     "description": description,
@@ -25,7 +25,7 @@ export default function SEO() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Ruang Tugas",
+    "name": "Surgency Studio",
     "url": url,
     "description": description
   };

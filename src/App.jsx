@@ -5,9 +5,10 @@ import WhatsAppButton from './components/WhatsAppButton';
 import Hero from './components/Hero';
 import Brosur from './components/Brosur';
 import Layanan from './components/Layanan';
-import CaraKerja from './components/CaraKerja';
-import Keunggulan from './components/Keunggulan';
-import FormPesan from './components/FormPesan';
+import Portofolio from './components/Portofolio';
+import Testimoni from './components/Testimoni';
+import FAQ from './components/FAQ';
+import Kontak from './components/Kontak';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -19,9 +20,10 @@ export default function App() {
         <Hero />
         <Brosur />
         <Layanan />
-        <CaraKerja />
-        <Keunggulan />
-        <FormPesan />
+        <Portofolio />
+        <Testimoni />
+        <FAQ />
+        <Kontak />
       </main>
       <BottomNav />
       <WhatsAppButton />

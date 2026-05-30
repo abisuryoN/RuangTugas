@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ruangtugas.com/sitemap.xml
+Sitemap: https://surgencystudio.com/sitemap.xml

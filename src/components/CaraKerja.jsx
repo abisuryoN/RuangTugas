@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { HiClipboardList, HiPaperAirplane, HiCog, HiCheckCircle, HiChatAlt2 } from 'react-icons/hi';
@@ -10,36 +10,36 @@ const steps = [
   {
     icon: HiClipboardList,
     step: '01',
-    title: 'Isi Form Pemesanan',
-    desc: 'Lengkapi form dengan detail tugas, jenis tugas, dan deadline yang dibutuhkan.',
+    title: 'Kirim Brief',
+    desc: 'Ceritakan kebutuhan, layanan yang dipilih, dan deadline yang diinginkan.',
     color: 'from-blue-400 to-blue-600',
   },
   {
     icon: HiPaperAirplane,
     step: '02',
-    title: 'Data Terkirim Otomatis',
-    desc: 'Pesanan kamu langsung terkirim ke semua admin kami melalui WhatsApp secara otomatis.',
+    title: 'Brief Terkirim',
+    desc: 'Kebutuhan Anda langsung masuk ke WhatsApp tim Surgency Studio.',
     color: 'from-cyan-400 to-blue-500',
   },
   {
     icon: HiChatAlt2,
     step: '03',
-    title: 'Konfirmasi Pesanan',
-    desc: 'Admin akan menghubungi kamu untuk memastikan orderan sudah benar.',
+    title: 'Konfirmasi Detail',
+    desc: 'Admin akan menghubungi Anda untuk memastikan scope dan estimasi.',
     color: 'from-violet-400 to-purple-500',
   },
   {
     icon: HiCog,
     step: '04',
-    title: 'Admin Memproses',
-    desc: 'Tim kami segera mengerjakan tugas dengan teliti dan profesional sesuai kebutuhan.',
+    title: 'Tim Memproses',
+    desc: 'Tim kami mengolah kebutuhan dengan teliti dan profesional.',
     color: 'from-indigo-400 to-blue-600',
   },
   {
     icon: HiCheckCircle,
     step: '05',
-    title: 'Tugas Selesai!',
-    desc: 'Tugas dikirimkan tepat waktu sebelum deadline. Revisi gratis jika diperlukan.',
+    title: 'Hasil Dikirim',
+    desc: 'Output dikirim sesuai kesepakatan. Revisi tersedia jika diperlukan.',
     color: 'from-emerald-400 to-teal-500',
   },
 ];
@@ -86,7 +86,7 @@ export default function CaraKerja() {
             <span className="text-text-heading">Semudah </span><span className="text-gradient">5 Langkah</span>
           </p>
           <p className="text-text-body/70 text-base sm:text-lg leading-relaxed">
-            Proses pemesanan yang cepat, mudah, dan otomatis tanpa ribet.
+            Proses konsultasi yang cepat, mudah, dan transparan.
           </p>
         </div>
 
