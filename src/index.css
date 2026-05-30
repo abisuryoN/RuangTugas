@@ -520,8 +520,9 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 992px) {
   .pricing-grid {
     grid-template-columns: 1fr;
-    max-width: 520px;
+    max-width: 430px;
     margin: 0 auto;
+    gap: 16px;
   }
 
   .pricing-card.recommended {
@@ -531,7 +532,12 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 640px) {
   .pricing-section {
-    padding: 72px 18px;
+    padding: 34px 14px 38px;
+  }
+
+  .pricing-wave-top svg,
+  .pricing-wave-bottom svg {
+    height: 54px;
   }
 
   .pricing-logo img {
@@ -539,27 +545,27 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .pricing-title {
-    font-size: 42px;
+    font-size: 34px;
   }
 
   .pricing-subtitle {
-    font-size: 16px;
-    margin-bottom: 36px;
+    font-size: 15px;
+    margin-bottom: 26px;
   }
 
   .pricing-card-body {
-    padding: 26px 22px;
+    padding: 22px 20px 20px;
   }
 
   .pricing-bottom-cta {
     grid-template-columns: 1fr;
-    border-radius: 24px;
+    border-radius: 18px;
   }
 
   .pricing-bottom-cta a,
   .pricing-bottom-cta div {
-    font-size: 16px;
-    padding: 16px 18px;
+    font-size: 14px;
+    padding: 14px 16px;
   }
 
   .pricing-shape-top,
