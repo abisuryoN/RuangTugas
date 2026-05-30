@@ -65,14 +65,17 @@ export default function Hero() {
                 clipPath: 'polygon(18% 0, 100% 0, 100% 100%, 38% 100%, 0 62%, 0 31%)',
               }}
             />
-            <div className="absolute right-[14%] top-[58%] h-16 w-16 rounded-full bg-[#0b55f5] shadow-2xl shadow-primary/30 sm:h-20 sm:w-20 lg:right-[22%] lg:top-[55%] lg:h-24 lg:w-24" />
-
-            <div className="relative -ml-8 w-[82%] rounded-r-[1.6rem] bg-white px-8 py-10 shadow-[0_18px_50px_rgba(15,23,42,0.16)] ring-1 ring-blue-100 sm:-ml-10 sm:w-[72%] sm:px-10 sm:py-13 lg:-ml-8 lg:w-[62%] lg:px-12 lg:py-14 xl:-ml-4 xl:w-[58%]">
-              <img
-                src="/surgency-01.png"
-                alt="Logo Surgency Studio"
-                className="h-24 w-auto object-contain sm:h-28 lg:h-32 xl:h-36"
-              />
+            <div className="relative -ml-5 w-[78%] sm:-ml-8 sm:w-[70%] lg:-ml-4 lg:w-[62%] xl:w-[58%]">
+              <div className="flex h-[145px] items-center overflow-hidden rounded-[1.55rem] bg-white px-8 shadow-[0_18px_50px_rgba(15,23,42,0.16)] ring-1 ring-blue-100 sm:h-[165px] sm:px-10 lg:h-[185px] lg:px-12 xl:h-[198px]">
+                <div className="relative h-24 w-full overflow-hidden sm:h-28 lg:h-32 xl:h-36">
+                  <img
+                    src="/surgency-01.png"
+                    alt="Logo Surgency Studio"
+                    className="absolute left-1/2 top-1/2 h-full w-auto max-w-none -translate-x-1/2 -translate-y-1/2 scale-[2.15] object-contain"
+                  />
+                </div>
+              </div>
+              <div className="absolute -right-8 top-[60%] h-16 w-16 -translate-y-1/2 rounded-full bg-[#0b55f5] shadow-2xl shadow-primary/30 sm:-right-10 sm:h-20 sm:w-20 lg:-right-12 lg:h-24 lg:w-24" />
             </div>
           </div>
         </div>
