@@ -61,7 +61,6 @@ const portfolioItems = [
     category: 'Video',
     type: 'video',
     image: '/video-porto.png',
-    videoUrl: '/video-1.mp4',
     description: 'Showcase konten video, reels, dan social media content untuk kebutuhan brand, campaign, dan promosi digital.',
   },
   {

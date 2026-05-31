@@ -1,14 +1,18 @@
 import { HiHome, HiBriefcase, HiStar, HiQuestionMarkCircle } from 'react-icons/hi';
+import useActiveSection from '../hooks/useActiveSection';
 
 const bottomLinks = [
   { label: 'Beranda', href: '#beranda', icon: HiHome },
-  { label: 'Layanan', href: '#layanan', icon: HiBriefcase },
   { label: 'Paket', href: '#paket', icon: HiStar },
+  { label: 'Layanan', href: '#layanan', icon: HiBriefcase },
   { label: 'Portofolio', href: '#portofolio', icon: HiBriefcase },
   { label: 'FAQ', href: '#faq', icon: HiQuestionMarkCircle },
 ];
+const bottomSectionIds = bottomLinks.map((link) => link.href.slice(1));
 
 export default function BottomNav() {
+  const activeSection = useActiveSection(bottomSectionIds);
+
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const target = document.querySelector(href);
@@ -24,12 +28,24 @@ export default function BottomNav() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="flex flex-col items-center gap-0.5 group min-w-[50px] py-1"
+              className={`flex min-w-[50px] flex-col items-center gap-0.5 rounded-xl py-1 transition-colors duration-300 ${
+                activeSection === link.href.slice(1)
+                  ? 'bg-primary-dark'
+                  : 'group'
+              }`}
             >
-              <div className="p-1 rounded-xl group-hover:bg-blue-50 transition-colors duration-300">
-                <link.icon className="text-lg text-text-body group-hover:text-primary transition-colors duration-300" />
+              <div className="rounded-xl p-1 transition-colors duration-300 group-hover:bg-blue-50">
+                <link.icon className={`text-lg transition-colors duration-300 ${
+                  activeSection === link.href.slice(1)
+                    ? 'text-white'
+                    : 'text-text-body group-hover:text-primary'
+                }`} />
               </div>
-              <span className="text-[9px] font-bold text-text-body/60 group-hover:text-primary transition-colors duration-300 uppercase tracking-tighter text-center">
+              <span className={`text-center text-[9px] font-bold uppercase tracking-tighter transition-colors duration-300 ${
+                activeSection === link.href.slice(1)
+                  ? 'text-white'
+                  : 'text-text-body/60 group-hover:text-primary'
+              }`}>
                 {link.label}
               </span>
             </a>

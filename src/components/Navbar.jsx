@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
+import useActiveSection from '../hooks/useActiveSection';
 
 const navLinks = [
   { label: 'Beranda', href: '#beranda' },
-  { label: 'Layanan', href: '#layanan' },
   { label: 'Paket', href: '#paket' },
+  { label: 'Layanan', href: '#layanan' },
   { label: 'Portofolio', href: '#portofolio' },
   { label: 'Testimoni', href: '#testimoni' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Kontak', href: '#kontak' },
 ];
+const navSectionIds = navLinks.map((link) => link.href.slice(1));
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const activeSection = useActiveSection(navSectionIds);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -62,7 +65,11 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="px-4 py-2 rounded-xl text-sm font-medium text-text-heading hover:text-primary hover:bg-secondary transition-all duration-300"
+                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+                  activeSection === link.href.slice(1)
+                    ? 'bg-secondary text-primary'
+                    : 'text-text-heading hover:text-primary hover:bg-secondary'
+                }`}
               >
                 {link.label}
               </a>

@@ -135,7 +135,7 @@ export default function Layanan() {
         </div>
 
         {/* Mobile: 2 columns | Desktop: 3 columns */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+        <div className="grid grid-cols-2 items-start md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
           {services.map((svc, i) => {
             const Icon = svc.icon;
             return (

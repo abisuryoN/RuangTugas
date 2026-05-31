@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { FaPlay, FaExternalLinkAlt, FaWhatsapp } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaWhatsapp } from 'react-icons/fa';
 import portfolioItems from '../data/portfolio';
 import PortfolioModal from './PortfolioModal';
 
@@ -8,7 +8,7 @@ const filters = ['Semua', 'Design', 'Video', 'Web'];
 
 const categoryLabel = {
   Design: 'Lihat Design',
-  Video: 'Putar Video',
+  Video: 'Lihat Preview',
   Web: 'Lihat Preview',
 };
 
@@ -127,13 +127,6 @@ export default function Portofolio() {
                 <span className="absolute left-3 top-3 rounded-full bg-primary-dark px-3 py-1 text-[10px] font-bold text-white">
                   {item.category}
                 </span>
-                {item.type === 'video' && (
-                  <span className="absolute inset-0 bg-primary-dark/10">
-                    <span className="play-button shadow-lg">
-                      <FaPlay className="ml-1 text-base" />
-                    </span>
-                  </span>
-                )}
               </button>
 
               <div className="flex flex-1 flex-col p-5">

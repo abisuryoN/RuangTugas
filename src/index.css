@@ -1035,25 +1035,6 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: cover;
 }
 
-.play-button {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: rgba(9, 19, 68, 0.88);
-  color: #ffffff;
-  display: grid;
-  place-items: center;
-  z-index: 3;
-  transition: background-color 180ms ease;
-}
-
-.play-button:hover {
-  background: #0542c9;
-}
-
 .portfolio-modal-overlay {
   position: fixed;
   inset: 0;
@@ -1090,13 +1071,6 @@ h1, h2, h3, h4, h5, h6 {
   height: auto;
   max-height: 86vh;
   object-fit: contain;
-  display: block;
-}
-
-.portfolio-modal-media video {
-  width: 100%;
-  max-height: 86vh;
-  background: #000000;
   display: block;
 }
 
@@ -1188,8 +1162,7 @@ h1, h2, h3, h4, h5, h6 {
     max-height: 78vh;
   }
 
-  .portfolio-modal-media img,
-  .portfolio-modal-media video {
+  .portfolio-modal-media img {
     max-height: 78vh;
   }
 
@@ -1227,11 +1200,6 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
   .portfolio-media {
     aspect-ratio: 16 / 9;
-  }
-
-  .play-button {
-    width: 46px;
-    height: 46px;
   }
 
   .portfolio-card[data-type="video"] {
