@@ -998,6 +998,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 8px 6px;
     border-radius: 18px;
     z-index: 1000;
+    transition: opacity 180ms ease, transform 180ms ease;
   }
 }
 
@@ -1005,11 +1006,20 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
   .floating-whatsapp,
   a[aria-label*="WhatsApp"] {
-    bottom: 98px !important;
+    bottom: 116px !important;
     right: 18px !important;
     width: 52px !important;
     height: 52px !important;
     z-index: 998 !important;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  body.mobile-menu-open nav.fixed.bottom-6,
+  body.mobile-menu-open a[aria-label*="WhatsApp"] {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 180ms ease, transform 180ms ease;
   }
 }
 
