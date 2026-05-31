@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
+import { FaWhatsapp, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
 import WaveDivider from './WaveDivider';
 
 const WA_LINK = 'https://wa.me/6285719630624';
@@ -13,14 +13,6 @@ const contactCards = [
     cta: 'Chat WhatsApp',
     href: WA_LINK,
     tone: 'bg-primary-dark',
-  },
-  {
-    icon: FaEnvelope,
-    label: 'Email',
-    value: 'halo@surgencystudio.com',
-    cta: 'Kirim Email',
-    href: 'mailto:halo@surgencystudio.com',
-    tone: 'bg-primary',
   },
   {
     icon: FaMapMarkerAlt,
@@ -79,7 +71,7 @@ Kebutuhan: ${form.kebutuhan}`;
         </div>
 
         {/* Contact Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-10">
           {contactCards.map((card, i) => {
             const Icon = card.icon;
             return (

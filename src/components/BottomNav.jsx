@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HiHome, HiBriefcase, HiStar, HiQuestionMarkCircle } from 'react-icons/hi';
+import { HiChevronUp, HiHome, HiBriefcase, HiStar, HiQuestionMarkCircle } from 'react-icons/hi';
 import { useLocation } from 'react-router-dom';
 import useActiveSection from '../hooks/useActiveSection';
 
@@ -57,13 +57,23 @@ export default function BottomNav() {
               key={link.href}
               type="button"
               onClick={() => setServicesOpen((open) => !open)}
-              className={`flex min-w-[50px] flex-col items-center gap-0.5 rounded-xl py-1 transition-colors duration-300 ${
+              className={`relative flex min-w-[50px] flex-col items-center gap-0.5 rounded-xl py-1 transition-colors duration-300 ${
                 isServicePage || servicesOpen || (isHomePage && activeSection === 'layanan')
                   ? 'bg-primary-dark'
                   : 'group'
               }`}
               aria-expanded={servicesOpen}
             >
+              <HiChevronUp
+                className={`absolute -right-0.5 -top-1 text-[11px] transition-transform duration-300 ${
+                  servicesOpen ? 'rotate-180' : ''
+                } ${
+                  isServicePage || servicesOpen || (isHomePage && activeSection === 'layanan')
+                    ? 'text-white'
+                    : 'text-primary-dark'
+                }`}
+                aria-hidden="true"
+              />
               <div className="rounded-xl p-1 transition-colors duration-300 group-hover:bg-blue-50">
                 <link.icon className={`text-lg transition-colors duration-300 ${
                   isServicePage || servicesOpen || (isHomePage && activeSection === 'layanan')
