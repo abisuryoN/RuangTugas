@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { HiAcademicCap, HiCode, HiColorSwatch } from 'react-icons/hi';
 import WaveDivider from './WaveDivider';
@@ -22,11 +23,86 @@ const pillars = [
   },
 ];
 
+function PillarCard({ item }) {
+  const Icon = item.icon;
+  return (
+    <article className="brosur-pillar-card rounded-[22px] border border-[rgba(5,66,201,0.15)] bg-secondary p-5">
+      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-2xl text-primary shadow-sm">
+        <Icon />
+      </div>
+      <h3 className="text-lg font-extrabold text-text-heading">{item.title}</h3>
+      <p className="mt-2 text-xs leading-6 text-text-body/75">{item.desc}</p>
+    </article>
+  );
+}
+
 export default function Brosur() {
+  const carouselRef = useRef(null);
+  const transitionTimerRef = useRef(null);
+  const isTransitioningRef = useRef(false);
+  const activeSlideRef = useRef(7);
+  const mobilePillars = Array.from({ length: 5 }, () => pillars).flat();
+
+  const scrollToSlide = (index) => {
+    const carousel = carouselRef.current;
+    const slide = carousel?.children[index];
+    if (!carousel || !slide) return;
+
+    carousel.scrollTo({
+      left: slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2,
+      behavior: 'smooth',
+    });
+    activeSlideRef.current = index;
+  };
+
+  const jumpToSlide = (index) => {
+    const carousel = carouselRef.current;
+    const slide = carousel?.children[index];
+    if (!carousel || !slide) return;
+
+    carousel.style.scrollBehavior = 'auto';
+    carousel.style.scrollSnapType = 'none';
+    carousel.scrollLeft = slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2;
+    activeSlideRef.current = index;
+
+    requestAnimationFrame(() => {
+      carousel.style.scrollBehavior = '';
+      carousel.style.scrollSnapType = '';
+    });
+  };
+
+  const moveCarousel = (direction) => {
+    if (isTransitioningRef.current) return;
+
+    let currentIndex = activeSlideRef.current;
+    if (currentIndex <= 3) {
+      currentIndex += pillars.length * 2;
+      jumpToSlide(currentIndex);
+    } else if (currentIndex >= mobilePillars.length - 4) {
+      currentIndex -= pillars.length * 2;
+      jumpToSlide(currentIndex);
+    }
+
+    isTransitioningRef.current = true;
+    requestAnimationFrame(() => scrollToSlide(currentIndex + direction));
+    window.clearTimeout(transitionTimerRef.current);
+    transitionTimerRef.current = window.setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 380);
+  };
+
+  useEffect(() => {
+    const positionCarousel = requestAnimationFrame(() => jumpToSlide(activeSlideRef.current));
+    return () => {
+      cancelAnimationFrame(positionCarousel);
+      window.clearTimeout(transitionTimerRef.current);
+    };
+  }, []);
+
   return (
     <section id="brosur" className="relative overflow-hidden bg-secondary">
       <div className="w-full px-5 sm:px-8 lg:px-12 xl:px-16 py-12 md:py-16">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 rounded-[28px] border border-[rgba(9,19,68,0.08)] bg-white p-5 shadow-[0_18px_55px_rgba(9,19,68,0.08)] sm:p-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mx-auto grid min-w-0 max-w-6xl items-center gap-8 overflow-hidden rounded-[28px] border border-[rgba(9,19,68,0.08)] bg-white p-5 shadow-[0_18px_55px_rgba(9,19,68,0.08)] sm:p-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="brand-panel rounded-[24px] bg-primary-dark p-6 text-white sm:p-8">
             <img
               src="/surgency-01.png"
@@ -52,19 +128,36 @@ export default function Brosur() {
             </a>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="hidden gap-4 sm:grid sm:grid-cols-3">
             {pillars.map((item) => {
-              const Icon = item.icon;
               return (
-                <article key={item.title} className="rounded-[22px] border border-[rgba(5,66,201,0.15)] bg-secondary p-5">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-2xl text-primary shadow-sm">
-                    <Icon />
-                  </div>
-                  <h3 className="text-lg font-extrabold text-text-heading">{item.title}</h3>
-                  <p className="mt-2 text-xs leading-6 text-text-body/75">{item.desc}</p>
-                </article>
+                <PillarCard key={item.title} item={item} />
               );
             })}
+          </div>
+
+          <div className="brosur-carousel-shell sm:hidden">
+            <div ref={carouselRef} className="brosur-carousel" aria-label="Pilihan layanan Surgency Studio">
+              {mobilePillars.map((item, index) => (
+                <PillarCard key={`${item.title}-${index}`} item={item} />
+              ))}
+            </div>
+            <button
+              type="button"
+              className="brosur-carousel-button brosur-carousel-prev"
+              onClick={() => moveCarousel(-1)}
+              aria-label="Lihat layanan sebelumnya"
+            >
+              &lt;
+            </button>
+            <button
+              type="button"
+              className="brosur-carousel-button brosur-carousel-next"
+              onClick={() => moveCarousel(1)}
+              aria-label="Lihat layanan berikutnya"
+            >
+              &gt;
+            </button>
           </div>
         </div>
       </div>

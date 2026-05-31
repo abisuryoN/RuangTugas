@@ -721,7 +721,15 @@ h1, h2, h3, h4, h5, h6 {
 /* ===== Layanan Mobile — 1 kolom lebar, teks tidak mepet ===== */
 @media (max-width: 768px) {
   #layanan {
-    padding: 56px 16px 80px;
+    padding: 0;
+  }
+
+  #layanan > div {
+    padding: 28px 16px 22px !important;
+  }
+
+  #layanan .layanan-title {
+    margin-bottom: 14px !important;
   }
 
   #layanan .grid {
@@ -963,6 +971,167 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ===== Wave Mobile — jelas seperti desktop ===== */
+/* ===== Brosur Pillars Mobile Carousel ===== */
+@media (max-width: 639px) {
+  .brosur-carousel-shell {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 22px;
+  }
+
+  .brosur-carousel {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 24px 18px;
+    overflow-x: hidden;
+    overscroll-behavior-x: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .brosur-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .brosur-carousel .brosur-pillar-card {
+    flex: 0 0 82%;
+    min-height: 210px;
+    scroll-snap-align: center;
+  }
+
+  .brosur-carousel-button {
+    position: absolute;
+    top: 50%;
+    z-index: 12;
+    display: flex;
+    height: 38px;
+    width: 38px;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    background: #091344;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+    box-shadow: 0 10px 24px rgba(9, 19, 68, 0.22);
+    transition: 0.2s ease;
+  }
+
+  .brosur-carousel-button:active {
+    transform: translateY(-50%) scale(0.92);
+    background: #0542c9;
+  }
+
+  .brosur-carousel-prev {
+    left: 4px;
+  }
+
+  .brosur-carousel-next {
+    right: 4px;
+  }
+}
+
+/* ===== Home Services Mobile Carousel ===== */
+@media (max-width: 767px) {
+  .layanan-carousel-shell {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+
+  .layanan-carousel {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    padding: 4px 24px 8px;
+    overflow-x: hidden;
+    overscroll-behavior-x: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .layanan-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .layanan-carousel .service-card {
+    flex: 0 0 86%;
+    min-height: 278px !important;
+    scroll-snap-align: center;
+  }
+
+  .layanan-carousel .service-detail-card {
+    height: 302px;
+  }
+
+  .layanan-carousel .service-detail-card p.line-clamp-2 {
+    min-height: 40px;
+    margin-bottom: 10px !important;
+  }
+
+  .layanan-carousel .service-detail-card .service-list {
+    min-height: 84px;
+  }
+
+  .layanan-carousel .service-detail-card .service-list-chips {
+    min-height: 50px;
+    align-content: flex-start;
+  }
+
+  .layanan-carousel .service-detail-card .show-more-service {
+    display: block;
+    min-height: 26px;
+    padding-top: 6px !important;
+    text-align: left;
+  }
+
+  .layanan-carousel .service-detail-card > a:first-of-type {
+    margin-top: auto;
+  }
+
+  .layanan-carousel-button {
+    position: absolute;
+    top: 50%;
+    z-index: 12;
+    display: flex;
+    height: 38px;
+    width: 38px;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    background: #091344;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+    box-shadow: 0 10px 24px rgba(9, 19, 68, 0.22);
+    transition: 0.2s ease;
+  }
+
+  .layanan-carousel-button:active {
+    transform: translateY(-50%) scale(0.92);
+    background: #0542c9;
+  }
+
+  .layanan-carousel-prev {
+    left: 4px;
+  }
+
+  .layanan-carousel-next {
+    right: 4px;
+  }
+}
+
 .section-wave-top,
 .section-wave-bottom {
   position: relative;
