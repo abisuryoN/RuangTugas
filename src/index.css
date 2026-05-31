@@ -575,7 +575,485 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ===== Mobile Scroll Hint ===== */
+.mobile-scroll-hint {
+  display: none;
+}
+
+/* ===== Hero / Section Mobile Base ===== */
+@media (max-width: 768px) {
+  section {
+    scroll-margin-top: 96px;
+  }
+
+  .section-header {
+    margin-bottom: 22px;
+  }
+
+  .section-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .section-title {
+    font-size: 26px;
+    line-height: 1.18;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 330px;
+    margin: 10px auto 0;
+  }
+
+  .section-inner,
+  .services-grid,
+  .pricing-container,
+  .portfolio-grid,
+  .faq-container {
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ===== Mobile Only Paket Card ===== */
+.mobile-only-service {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-only-service {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only-service {
+    display: none !important;
+  }
+}
+
+/* ===== Package Detail Modal ===== */
+.package-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 8, 22, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.package-modal {
+  width: min(360px, 100%);
+  max-height: 82vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.package-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 999px;
+  background: #f6f8fc;
+  color: #091344;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.package-modal-title {
+  color: #091344;
+  font-size: 22px;
+  font-weight: 900;
+  margin: 0 0 6px;
+}
+
+.package-modal-price {
+  color: #0542c9;
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.package-modal-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.package-modal-list li {
+  display: flex;
+  gap: 10px;
+  color: #091344;
+  font-size: 13px;
+}
+
+/* ===== Layanan Mobile — 1 kolom lebar, teks tidak mepet ===== */
+@media (max-width: 768px) {
+  #layanan {
+    padding: 56px 16px 80px;
+  }
+
+  #layanan .grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    padding: 0 4px !important;
+  }
+
+  .service-card {
+    padding: 20px 18px !important;
+    border-radius: 22px !important;
+    min-height: auto !important;
+    background: #ffffff !important;
+    box-shadow: 0 10px 24px rgba(9, 19, 68, 0.06) !important;
+    overflow: hidden !important;
+  }
+
+  .service-card h3 {
+    font-size: 17px !important;
+    line-height: 1.2 !important;
+  }
+
+  .service-card p.line-clamp-2 {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    margin: 8px 0 14px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    color: #5b6478 !important;
+  }
+
+  .service-chip {
+    font-size: 11px !important;
+    padding: 6px 10px !important;
+    border-radius: 999px !important;
+  }
+
+  .show-more-service {
+    font-size: 12px !important;
+    padding-top: 8px !important;
+    color: #0542c9 !important;
+    font-weight: 800 !important;
+  }
+
+  .service-card .service-button,
+  .service-card .package-button {
+    min-height: 42px !important;
+    padding: 11px 14px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+    margin-top: 14px !important;
+  }
+}
+
+/* ===== Pricing Mobile — soft 1 kolom, card tidak kepotong ===== */
+@media (max-width: 768px) {
+  .mobile-scroll-hint {
+    display: none;
+  }
+
+  .pricing-section {
+    padding: 68px 16px 88px !important;
+  }
+
+  .pricing-container {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+  }
+
+  .pricing-title {
+    font-size: 31px;
+    line-height: 1.12;
+    margin-bottom: 10px;
+  }
+
+  .pricing-subtitle {
+    font-size: 13.5px;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto 26px;
+    text-align: center;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .pricing-card {
+    position: relative;
+    border-radius: 22px !important;
+    overflow: visible;
+    box-shadow: 0 14px 32px rgba(9, 19, 68, 0.08);
+  }
+
+  .pricing-card.recommended {
+    transform: none;
+    margin-top: 8px;
+  }
+
+  .pricing-card-inner {
+    border-radius: 22px !important;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .pricing-card-header {
+    padding: 18px 16px 14px;
+  }
+
+  .pricing-package-name {
+    font-size: 21px;
+    letter-spacing: 0.03em;
+  }
+
+  .recommend-badge {
+    top: -12px;
+    padding: 6px 14px;
+    font-size: 11px;
+    z-index: 10;
+  }
+
+  .pricing-card-body {
+    padding: 18px;
+  }
+
+  .old-price {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .new-price {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .package-divider {
+    margin-bottom: 12px;
+  }
+
+  .feature-list {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .feature-list li {
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+
+  .check-icon {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    font-size: 10px;
+  }
+
+  .pricing-detail-button {
+    font-size: 12px;
+    padding: 2px 0 12px;
+    margin: 0 auto;
+    display: block;
+    border: none;
+    background: transparent;
+    color: #0542c9;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .package-button {
+    min-height: 40px;
+    padding: 10px 12px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+}
+
+/* ===== Wave Mobile — jelas seperti desktop ===== */
+.section-wave-top,
+.section-wave-bottom {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.section-wave-top svg,
+.section-wave-bottom svg {
+  display: block;
+  width: 100%;
+  height: 84px;
+}
+
+@media (max-width: 768px) {
+  .section-wave-top svg,
+  .section-wave-bottom svg {
+    height: 58px;
+  }
+}
+
+/* ===== Portfolio & FAQ Mobile ===== */
+@media (max-width: 768px) {
+  .portfolio-section {
+    padding: 56px 18px 92px;
+  }
+
+  .portfolio-section .flex.flex-wrap {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .portfolio-section .flex.flex-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .portfolio-section .flex.flex-wrap button {
+    flex: 0 0 auto;
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+
+  .portfolio-section article {
+    min-height: 380px;
+  }
+
+  .portfolio-section article .aspect-\[16\/10\] {
+    aspect-ratio: 16 / 9;
+  }
+
+  .portfolio-section article h3 {
+    font-size: 17px;
+  }
+
+  .portfolio-section article p {
+    font-size: 13px;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .faq-section {
+    padding: 56px 18px 92px;
+  }
+
+  .faq-section .border.rounded-\[18px\] {
+    border-radius: 16px;
+  }
+
+  .faq-section .border.rounded-\[18px\] button {
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .faq-section .border.rounded-\[18px\] p {
+    padding: 0 16px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* ===== Bottom Nav + Body Padding ===== */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 96px;
+  }
+
+  main {
+    padding-bottom: 96px;
+  }
+}
+
+/* ===== Bottom Nav Positioning ===== */
+@media (max-width: 768px) {
+  .mobile-bottom-nav,
+  nav.fixed.bottom-6 {
+    bottom: 14px;
+    width: min(340px, calc(100% - 30px));
+    padding: 8px 6px;
+    border-radius: 18px;
+    z-index: 1000;
+  }
+}
+
+/* ===== Floating WhatsApp — tidak nabrak bottom nav ===== */
+@media (max-width: 768px) {
+  .floating-whatsapp,
+  a[aria-label*="WhatsApp"] {
+    bottom: 98px !important;
+    right: 18px !important;
+    width: 52px !important;
+    height: 52px !important;
+    z-index: 998 !important;
+  }
+}
+
 /* ===== Portfolio Modal ===== */
+.portfolio-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #eef4ff;
+}
+
+.portfolio-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.portfolio-card[data-type="video"] .portfolio-media img,
+.portfolio-card[data-type="web"] .portfolio-media img,
+.portfolio-video-card .portfolio-media img {
+  object-fit: cover;
+}
+
+.play-button {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(9, 19, 68, 0.88);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+  transition: background-color 180ms ease;
+}
+
+.play-button:hover {
+  background: #0542c9;
+}
+
 .portfolio-modal-overlay {
   position: fixed;
   inset: 0;
@@ -743,5 +1221,20 @@ h1, h2, h3, h4, h5, h6 {
     margin: 14px auto 0;
     display: flex;
     width: fit-content;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .play-button {
+    width: 46px;
+    height: 46px;
+  }
+
+  .portfolio-card[data-type="video"] {
+    min-height: 380px;
   }
 }

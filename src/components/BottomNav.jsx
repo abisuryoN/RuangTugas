@@ -1,12 +1,11 @@
-import { HiHome, HiBriefcase, HiCamera, HiStar, HiQuestionMarkCircle, HiPaperAirplane } from 'react-icons/hi';
+import { HiHome, HiBriefcase, HiStar, HiQuestionMarkCircle } from 'react-icons/hi';
 
 const bottomLinks = [
   { label: 'Beranda', href: '#beranda', icon: HiHome },
   { label: 'Layanan', href: '#layanan', icon: HiBriefcase },
-  { label: 'Portofolio', href: '#portofolio', icon: HiCamera },
-  { label: 'Testimoni', href: '#testimoni', icon: HiStar },
+  { label: 'Paket', href: '#paket', icon: HiStar },
+  { label: 'Portofolio', href: '#portofolio', icon: HiBriefcase },
   { label: 'FAQ', href: '#faq', icon: HiQuestionMarkCircle },
-  { label: 'Kontak', href: '#kontak', icon: HiPaperAirplane },
 ];
 
 export default function BottomNav() {

@@ -7,15 +7,17 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Wave Divider Component
  * @param {string} topColor - CSS color for the top section
- * @param {string} bottomColor - CSS color for the bottom section  
+ * @param {string} bottomColor - CSS color for the bottom section
  * @param {boolean} flip - flip the wave vertically
  * @param {string} variant - 'default' | 'layered' | 'simple'
+ * @param {string} mobileHeight - custom mobile height override (e.g. 'h-[56px]')
  */
-export default function WaveDivider({ 
-  topColor = '#FFFFFF', 
-  bottomColor = '#F0F7FF', 
-  flip = false, 
-  variant = 'default' 
+export default function WaveDivider({
+  topColor = '#FFFFFF',
+  bottomColor = '#F0F7FF',
+  flip = false,
+  variant = 'default',
+  mobileHeight = '',
 }) {
   const waveRef = useRef(null);
 
@@ -56,7 +58,7 @@ export default function WaveDivider({
           <svg
             viewBox="0 0 1440 180"
             preserveAspectRatio="none"
-            className="w-full h-[80px] md:h-[140px] lg:h-[180px]"
+            className={`w-full h-[56px] md:h-[100px] lg:h-[180px] ${mobileHeight || ''}`}
             style={{ transform: flip ? 'scaleY(-1)' : 'none' }}
           >
             <path
@@ -90,7 +92,7 @@ export default function WaveDivider({
           <svg
             viewBox="0 0 1440 120"
             preserveAspectRatio="none"
-            className="w-full h-[50px] md:h-[80px] lg:h-[120px]"
+            className={`w-full h-[36px] md:h-[72px] lg:h-[120px] ${mobileHeight || ''}`}
             style={{ transform: flip ? 'scaleY(-1)' : 'none' }}
           >
             <path
@@ -112,7 +114,7 @@ export default function WaveDivider({
           <svg
             viewBox="0 0 1440 160"
             preserveAspectRatio="none"
-            className="w-full h-[60px] md:h-[110px] lg:h-[160px]"
+            className={`w-full h-[44px] md:h-[96px] lg:h-[160px] ${mobileHeight || ''}`}
             style={{ transform: flip ? 'scaleY(-1)' : 'none' }}
           >
             <path

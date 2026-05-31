@@ -110,12 +110,13 @@ export default function Portofolio() {
           {filteredItems.map((item) => (
             <article
               key={item.id}
-              className="group flex h-full min-h-[430px] flex-col overflow-hidden rounded-[22px] bg-white border border-[rgba(9,19,68,0.08)] shadow-[0_14px_35px_rgba(9,19,68,0.06)] hover:shadow-[0_18px_45px_rgba(9,19,68,0.10)] transition-all duration-300"
+              data-type={item.type}
+              className="portfolio-card group flex h-full min-h-[430px] flex-col overflow-hidden rounded-[22px] bg-white border border-[rgba(9,19,68,0.08)] shadow-[0_14px_35px_rgba(9,19,68,0.06)] hover:shadow-[0_18px_45px_rgba(9,19,68,0.10)] transition-all duration-300"
             >
               <button
                 type="button"
                 onClick={() => openPortfolio(item)}
-                className="relative block w-full aspect-[16/10] overflow-hidden bg-secondary text-left"
+                className="portfolio-media text-left"
                 aria-label={`Buka ${item.title}`}
               >
                 <img
@@ -127,9 +128,9 @@ export default function Portofolio() {
                   {item.category}
                 </span>
                 {item.type === 'video' && (
-                  <span className="absolute inset-0 flex items-center justify-center bg-primary-dark/20">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-primary-dark shadow-lg">
-                      <FaPlay className="ml-1 text-lg" />
+                  <span className="absolute inset-0 bg-primary-dark/10">
+                    <span className="play-button shadow-lg">
+                      <FaPlay className="ml-1 text-base" />
                     </span>
                   </span>
                 )}

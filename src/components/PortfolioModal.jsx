@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function PortfolioModal({
   isOpen,
@@ -9,6 +9,9 @@ export default function PortfolioModal({
   onPrev,
 }) {
   const isGallery = modalType === 'Design' || modalType === 'Web';
+  const videoRef = useRef(null);
+  const [errorVideoUrl, setErrorVideoUrl] = useState(null);
+  const videoError = errorVideoUrl === item?.videoUrl;
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -25,6 +28,10 @@ export default function PortfolioModal({
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+      }
       document.body.style.overflow = originalOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
@@ -62,7 +69,19 @@ export default function PortfolioModal({
 
         <div className="portfolio-modal-media">
           {modalType === 'Video' ? (
-            <video key={item.videoUrl} src={item.videoUrl} controls />
+            item.videoUrl && !videoError ? (
+              <video
+                ref={videoRef}
+                key={item.videoUrl}
+                src={item.videoUrl}
+                poster={item.image}
+                controls
+                preload="metadata"
+                onError={() => setErrorVideoUrl(item.videoUrl)}
+              />
+            ) : (
+              <img src={item.image} alt={item.title} />
+            )
           ) : (
             <img src={item.image} alt={item.title} />
           )}
