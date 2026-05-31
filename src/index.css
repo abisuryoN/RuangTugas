@@ -1219,6 +1219,72 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ===== Portfolio Mobile Carousel ===== */
+@media (max-width: 639px) {
+  .portfolio-carousel-shell {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+
+  .portfolio-carousel {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    padding: 8px 24px 16px;
+    overflow-x: hidden;
+    overscroll-behavior-x: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .portfolio-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .portfolio-carousel .portfolio-card {
+    flex: 0 0 86%;
+    min-height: 390px;
+    scroll-snap-align: center;
+  }
+
+  .portfolio-carousel-button {
+    position: absolute;
+    top: 45%;
+    z-index: 12;
+    display: flex;
+    height: 38px;
+    width: 38px;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    background: #091344;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+    box-shadow: 0 10px 24px rgba(9, 19, 68, 0.22);
+    transition: 0.2s ease;
+  }
+
+  .portfolio-carousel-button:active {
+    transform: translateY(-50%) scale(0.92);
+    background: #0542c9;
+  }
+
+  .portfolio-carousel-prev {
+    left: 4px;
+  }
+
+  .portfolio-carousel-next {
+    right: 4px;
+  }
+}
+
 /* ===== Bottom Nav Positioning ===== */
 @media (max-width: 768px) {
   .mobile-bottom-nav,
