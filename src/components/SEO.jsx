@@ -1,10 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 
-export default function SEO() {
-  const title = "Surgency Studio | Edu, Creative, Digital";
-  const description = "Surgency Studio adalah partner edukasi, kreatif, dan digital untuk kebutuhan akademik, desain, coding, website, dan branding dengan hasil profesional.";
+export default function SEO({
+  title = "Surgency Studio | Edu, Creative, Digital",
+  description = "Surgency Studio adalah partner edukasi, kreatif, dan digital untuk kebutuhan akademik, desain, coding, website, dan branding dengan hasil profesional.",
+  path = "",
+}) {
   const keywords = "Surgency Studio, layanan akademik, desain kreatif, website, coding, branding digital, desain poster, feed Instagram, UI UX";
-  const url = "https://surgencystudio.com/";
+  const url = `https://surgencystudio.com/${path}`;
   const image = "https://surgencystudio.com/surgency-01.png";
 
   // JSON-LD Structured Data

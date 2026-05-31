@@ -50,6 +50,7 @@ const services = [
     desc: 'Pendampingan akademik untuk riset, struktur, perapihan dokumen, dan pemahaman materi agar hasil lebih terarah.',
     list: eduServices,
     accent: 'bg-[#0542c9]',
+    detailHref: '/edu',
   },
   {
     icon: HiColorSwatch,
@@ -58,6 +59,7 @@ const services = [
     desc: 'Layanan desain dan konten kreatif untuk kebutuhan visual, promosi, personal branding, dan media sosial.',
     list: creativeServices,
     accent: 'bg-[#123a92]',
+    detailHref: '/creative',
   },
   {
     icon: HiDesktopComputer,
@@ -66,6 +68,7 @@ const services = [
     desc: 'Solusi digital untuk website, coding, UI, dan project online yang modern, responsif, serta mudah dikembangkan.',
     list: digitalServices,
     accent: 'bg-[#091344]',
+    detailHref: '/digital',
   },
 ];
 
@@ -172,6 +175,12 @@ export default function Layanan() {
                   className="mt-3 md:mt-4 w-full text-center py-2 md:py-2.5 rounded-xl text-[11px] md:text-sm font-semibold bg-primary-dark text-white shadow-[0_12px_24px_rgba(9,19,68,0.18)] hover:bg-primary hover:shadow-[0_14px_28px_rgba(5,66,201,0.22)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
                 >
                   Konsultasi Layanan
+                </a>
+                <a
+                  href={svc.detailHref}
+                  className="relative z-10 mt-2 text-center text-[11px] font-bold text-primary transition-colors hover:text-primary-dark md:text-xs"
+                >
+                  Lihat Detail &rarr;
                 </a>
 
                 <div className="absolute inset-0 rounded-[24px] bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />

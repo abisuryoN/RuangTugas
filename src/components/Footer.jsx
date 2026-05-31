@@ -1,4 +1,8 @@
+import { useLocation } from 'react-router-dom';
+
 export default function Footer() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
   return (
     <>
       <footer className="bg-primary-dark text-white">
@@ -39,8 +43,9 @@ export default function Footer() {
                 ].map((link) => (
                   <li key={link.href}>
                     <a
-                      href={link.href}
+                      href={isHomePage ? link.href : `/${link.href}`}
                       onClick={(e) => {
+                        if (!isHomePage) return;
                         e.preventDefault();
                         document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
                       }}

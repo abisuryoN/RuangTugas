@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
-import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { HiChevronDown, HiMenuAlt3, HiX } from 'react-icons/hi';
+import { useLocation } from 'react-router-dom';
 import useActiveSection from '../hooks/useActiveSection';
 
 const WA_LINK = 'https://wa.me/6285719630624?text=Halo%20Surgency%20Studio%2C%20saya%20ingin%20konsultasi%20layanan.';
@@ -15,11 +16,21 @@ const navLinks = [
   { label: 'Kontak', href: '#kontak' },
 ];
 const navSectionIds = navLinks.map((link) => link.href.slice(1));
+const serviceLinks = [
+  { label: 'Surgency Edu', href: '/edu', desc: 'Pendampingan akademik' },
+  { label: 'Surgency Creative', href: '/creative', desc: 'Desain dan konten kreatif' },
+  { label: 'Surgency Digital', href: '/digital', desc: 'Website dan solusi digital' },
+];
 
 export default function Navbar() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  const isServicePage = serviceLinks.some((link) => link.href === location.pathname);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuLayerActive, setMobileMenuLayerActive] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const closeTimerRef = useRef(null);
   const activeSection = useActiveSection(navSectionIds);
 
@@ -31,6 +42,7 @@ export default function Navbar() {
 
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
+    setMobileServicesOpen(false);
     clearTimeout(closeTimerRef.current);
     closeTimerRef.current = setTimeout(() => {
       setMobileMenuLayerActive(false);
@@ -67,8 +79,9 @@ export default function Navbar() {
   useEffect(() => () => clearTimeout(closeTimerRef.current), []);
 
   const handleNavClick = (e, href) => {
-    e.preventDefault();
     closeMobileMenu();
+    if (!isHomePage) return;
+    e.preventDefault();
     const target = document.querySelector(href);
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   };
@@ -88,7 +101,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a
-            href="#beranda"
+            href={isHomePage ? '#beranda' : '/#beranda'}
             className="flex items-center gap-2 group"
             onClick={(e) => handleNavClick(e, '#beranda')}
           >
@@ -116,13 +129,49 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {navLinks.map((link) => link.href === '#layanan' ? (
+              <div key={link.href} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setServicesOpen((open) => !open)}
+                  className={`flex items-center gap-1 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    isServicePage || (isHomePage && activeSection === 'layanan')
+                      ? 'bg-secondary text-primary'
+                      : 'text-text-heading hover:text-primary hover:bg-secondary'
+                  }`}
+                  aria-expanded={servicesOpen}
+                >
+                  {link.label}
+                  <HiChevronDown className={`transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {servicesOpen && (
+                  <div className="absolute left-1/2 top-full mt-3 w-64 -translate-x-1/2 rounded-2xl border border-primary-dark/10 bg-white p-2 shadow-[0_18px_45px_rgba(9,19,68,0.14)]">
+                    {serviceLinks.map((service) => (
+                      <a
+                        key={service.href}
+                        href={service.href}
+                        className={`block rounded-xl px-3 py-2.5 transition-colors ${
+                          location.pathname === service.href
+                            ? 'bg-primary-dark text-white'
+                            : 'text-text-heading hover:bg-secondary hover:text-primary'
+                        }`}
+                      >
+                        <span className="block text-sm font-bold">{service.label}</span>
+                        <span className={`mt-0.5 block text-[11px] ${location.pathname === service.href ? 'text-white/65' : 'text-text-muted'}`}>
+                          {service.desc}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
               <a
                 key={link.href}
-                href={link.href}
+                href={isHomePage ? link.href : `/${link.href}`}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                  activeSection === link.href.slice(1)
+                  isHomePage && activeSection === link.href.slice(1)
                     ? 'bg-secondary text-primary'
                     : 'text-text-heading hover:text-primary hover:bg-secondary'
                 }`}
@@ -173,13 +222,46 @@ export default function Navbar() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          {navLinks.map((link) => (
+          {navLinks.map((link) => link.href === '#layanan' ? (
+            <div key={link.href}>
+              <button
+                type="button"
+                onClick={() => setMobileServicesOpen((open) => !open)}
+                className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold transition-colors duration-200 ${
+                  isServicePage
+                    ? 'bg-primary-dark text-white'
+                    : 'text-text-heading hover:bg-secondary hover:text-primary'
+                }`}
+                aria-expanded={mobileServicesOpen}
+              >
+                {link.label}
+                <HiChevronDown className={`transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {mobileServicesOpen && (
+                <div className="mt-1.5 space-y-1 rounded-2xl bg-secondary/70 p-2">
+                  {serviceLinks.map((service) => (
+                    <a
+                      key={service.href}
+                      href={service.href}
+                      className={`block rounded-xl px-3 py-2 text-xs font-bold transition-colors ${
+                        location.pathname === service.href
+                          ? 'bg-primary text-white'
+                          : 'text-text-heading hover:bg-white hover:text-primary'
+                      }`}
+                    >
+                      {service.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
             <a
               key={link.href}
-              href={link.href}
+              href={isHomePage ? link.href : `/${link.href}`}
               onClick={(e) => handleNavClick(e, link.href)}
               className={`rounded-xl px-4 py-3 text-sm font-semibold transition-colors duration-200 ${
-                activeSection === link.href.slice(1)
+                isHomePage && activeSection === link.href.slice(1)
                   ? 'bg-primary-dark text-white'
                   : 'text-text-heading hover:bg-secondary hover:text-primary'
               }`}

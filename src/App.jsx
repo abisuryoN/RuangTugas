@@ -1,35 +1,18 @@
-import SEO from './components/SEO';
-import Navbar from './components/Navbar';
-import BottomNav from './components/BottomNav';
-import WhatsAppButton from './components/WhatsAppButton';
-import Hero from './components/Hero';
-import Brosur from './components/Brosur';
-import Layanan from './components/Layanan';
-import Pricing from './components/Pricing';
-import Portofolio from './components/Portofolio';
-import Testimoni from './components/Testimoni';
-import FAQ from './components/FAQ';
-import Kontak from './components/Kontak';
-import Footer from './components/Footer';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Edu from './pages/Edu';
+import Creative from './pages/Creative';
+import Digital from './pages/Digital';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <SEO />
-      <Navbar />
-      <main>
-        <Hero />
-        <Brosur />
-        <Pricing />
-        <Layanan />
-        <Portofolio />
-        <Testimoni />
-        <FAQ />
-        <Kontak />
-      </main>
-      <BottomNav />
-      <WhatsAppButton />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/edu" element={<Edu />} />
+        <Route path="/creative" element={<Creative />} />
+        <Route path="/digital" element={<Digital />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
