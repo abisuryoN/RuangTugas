@@ -207,7 +207,7 @@ export default function Layanan() {
             </div>
             <a
               href="#paket"
-              className="mt-4 w-full text-center py-2.5 rounded-xl text-[11px] font-semibold bg-amber-500 text-white shadow-[0_12px_24px_rgba(245,158,11,0.25)] hover:bg-amber-600 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+              className="mt-4 flex min-h-10 w-full items-center justify-center rounded-xl bg-amber-500 px-4 py-2.5 text-center text-xs font-semibold text-white shadow-[0_12px_24px_rgba(245,158,11,0.25)] transition-all duration-300 hover:scale-[1.02] hover:bg-amber-600 active:scale-[0.98]"
             >
               Lihat Paket
             </a>
