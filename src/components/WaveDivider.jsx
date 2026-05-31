@@ -22,6 +22,8 @@ export default function WaveDivider({
   const waveRef = useRef(null);
 
   useEffect(() => {
+    if (window.matchMedia('(max-width: 768px)').matches) return undefined;
+
     const ctx = gsap.context(() => {
       // Parallax effect on wave
       gsap.to(waveRef.current, {
@@ -142,7 +144,7 @@ export default function WaveDivider({
   return (
     <div
       ref={waveRef}
-      className="wave-container"
+      className={`wave-container wave-container-${variant}`}
       style={{ backgroundColor: topColor, marginTop: '-1px' }}
     >
       {renderWave()}

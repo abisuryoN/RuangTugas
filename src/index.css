@@ -160,6 +160,17 @@ h1, h2, h3, h4, h5, h6 {
   height: auto;
 }
 
+@media (max-width: 768px) {
+  .wave-container {
+    height: 0;
+    transform: none !important;
+  }
+
+  .wave-container svg {
+    display: none;
+  }
+}
+
 /* ===== Toast ===== */
 @keyframes toast-in {
   from { transform: translateY(100%) scale(0.9); opacity: 0; }
@@ -569,9 +580,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .pricing-shape-top,
-  .pricing-shape-bottom {
-    width: 260px;
-    height: 260px;
+  .pricing-shape-top-blue,
+  .pricing-shape-bottom,
+  .pricing-shape-bottom-blue {
+    display: none;
   }
 }
 
@@ -974,17 +986,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 16px 16px;
     font-size: 13px;
     line-height: 1.6;
-  }
-}
-
-/* ===== Bottom Nav + Body Padding ===== */
-@media (max-width: 768px) {
-  body {
-    padding-bottom: 96px;
-  }
-
-  main {
-    padding-bottom: 96px;
   }
 }
 
