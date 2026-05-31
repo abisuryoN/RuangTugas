@@ -296,6 +296,10 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 10px;
 }
 
+.pricing-carousel-shell {
+  display: none;
+}
+
 .pricing-card {
   position: relative;
   background: #ffffff;
@@ -805,11 +809,68 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .pricing-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding: 0;
-    overflow: visible;
+    display: none;
+  }
+
+  .pricing-carousel-shell {
+    position: relative;
+    display: block;
+  }
+
+  .pricing-carousel {
+    display: flex;
+    gap: 12px;
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    padding: 14px 28px 20px;
+    overflow-x: hidden;
+    overscroll-behavior-x: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .pricing-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pricing-carousel .pricing-card {
+    flex: 0 0 84%;
+    scroll-snap-align: center;
+  }
+
+  .pricing-carousel-button {
+    position: absolute;
+    top: 50%;
+    z-index: 12;
+    display: flex;
+    height: 38px;
+    width: 38px;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    background: #091344;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+    box-shadow: 0 10px 24px rgba(9, 19, 68, 0.22);
+    transition: 0.2s ease;
+  }
+
+  .pricing-carousel-button:active {
+    transform: translateY(-50%) scale(0.92);
+    background: #0542c9;
+  }
+
+  .pricing-carousel-prev {
+    left: 0;
+  }
+
+  .pricing-carousel-next {
+    right: 0;
   }
 
   .pricing-card {

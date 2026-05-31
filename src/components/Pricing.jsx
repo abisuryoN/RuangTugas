@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaWhatsapp, FaStar } from 'react-icons/fa';
 
 const pricingPackages = [
@@ -103,9 +103,62 @@ function PackageModal({ pkg, onClose }) {
   );
 }
 
+function PricingCard({ pkg, isMobile, onShowDetail }) {
+  return (
+    <article className={`pricing-card ${pkg.recommended ? 'recommended' : ''}`}>
+      {pkg.recommended && (
+        <div className="recommend-badge">
+          <FaStar />
+          REKOMENDASI
+        </div>
+      )}
+
+      <div className="pricing-card-header">
+        <h3 className="pricing-package-name">{pkg.name}</h3>
+      </div>
+
+      <div className="pricing-card-body">
+        <p className="old-price">{pkg.oldPrice}</p>
+        <p className="new-price">{pkg.price}</p>
+        <div className="package-divider" />
+
+        <ul className="feature-list">
+          {(isMobile ? pkg.features.slice(0, 4) : pkg.features).map((feature) => (
+            <li key={feature}>
+              <span className="check-icon">✓</span>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        {isMobile && pkg.features.length > 4 && (
+          <button className="pricing-detail-button" onClick={() => onShowDetail(pkg)}>
+            Detail Paket
+          </button>
+        )}
+
+        <a
+          href={createWhatsAppLink(pkg.name)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="package-button"
+        >
+          <FaWhatsapp />
+          {pkg.cta}
+        </a>
+      </div>
+    </article>
+  );
+}
+
 export default function Pricing() {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedPkg, setSelectedPkg] = useState(null);
+  const carouselRef = useRef(null);
+  const transitionTimerRef = useRef(null);
+  const isTransitioningRef = useRef(false);
+  const activeSlideRef = useRef(7);
+  const mobilePackages = Array.from({ length: 5 }, () => pricingPackages).flat();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -113,6 +166,67 @@ export default function Pricing() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  const scrollToSlide = (index, behavior = 'smooth') => {
+    const carousel = carouselRef.current;
+    const slide = carousel?.children[index];
+    if (!carousel || !slide) return;
+
+    carousel.scrollTo({
+      left: slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2,
+      behavior,
+    });
+    activeSlideRef.current = index;
+  };
+
+  const jumpToSlide = (index) => {
+    const carousel = carouselRef.current;
+    const slide = carousel?.children[index];
+    if (!carousel || !slide) return;
+
+    carousel.style.scrollBehavior = 'auto';
+    carousel.style.scrollSnapType = 'none';
+    carousel.scrollLeft = slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2;
+    activeSlideRef.current = index;
+
+    requestAnimationFrame(() => {
+      carousel.style.scrollBehavior = '';
+      carousel.style.scrollSnapType = '';
+    });
+  };
+
+  const moveCarousel = (direction) => {
+    if (isTransitioningRef.current) return;
+
+    let currentIndex = activeSlideRef.current;
+    if (currentIndex <= 3) {
+      currentIndex += pricingPackages.length * 2;
+      jumpToSlide(currentIndex);
+    } else if (currentIndex >= mobilePackages.length - 4) {
+      currentIndex -= pricingPackages.length * 2;
+      jumpToSlide(currentIndex);
+    }
+
+    const targetIndex = currentIndex + direction;
+    isTransitioningRef.current = true;
+    requestAnimationFrame(() => scrollToSlide(targetIndex));
+
+    window.clearTimeout(transitionTimerRef.current);
+    transitionTimerRef.current = window.setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 380);
+  };
+
+  useEffect(() => {
+    if (!isMobile) return undefined;
+
+    const positionCarousel = requestAnimationFrame(() => jumpToSlide(activeSlideRef.current));
+
+    return () => {
+      cancelAnimationFrame(positionCarousel);
+      window.clearTimeout(transitionTimerRef.current);
+    };
+  }, [isMobile]);
 
   return (
     <>
@@ -153,6 +267,39 @@ export default function Pricing() {
               Solusi konten dan landing page profesional untuk membangun{' '}
               <strong>brand</strong> dan <strong>mengembangkan bisnis</strong> Anda.
             </p>
+
+            <div className="pricing-carousel-shell">
+              <div
+                ref={carouselRef}
+                className="pricing-carousel"
+                aria-label="Pilihan paket Surgency Studio"
+              >
+                {mobilePackages.map((pkg, index) => (
+                  <PricingCard
+                    key={`${pkg.name}-${index}`}
+                    pkg={pkg}
+                    isMobile
+                    onShowDetail={setSelectedPkg}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                className="pricing-carousel-button pricing-carousel-prev"
+                onClick={() => moveCarousel(-1)}
+                aria-label="Lihat paket sebelumnya"
+              >
+                &lt;
+              </button>
+              <button
+                type="button"
+                className="pricing-carousel-button pricing-carousel-next"
+                onClick={() => moveCarousel(1)}
+                aria-label="Lihat paket berikutnya"
+              >
+                &gt;
+              </button>
+            </div>
 
             <div className="pricing-grid">
               {pricingPackages.map((pkg) => (
