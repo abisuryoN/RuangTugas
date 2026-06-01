@@ -45,20 +45,20 @@ const prices = [
   {
     title: 'Creative Basic',
     price: 'Mulai Rp350.000',
-    description: 'Untuk kebutuhan visual sederhana seperti desain feed, story, poster digital, thumbnail, dan video content ringan.',
-    items: ['3 desain visual', '1 video content', 'Format siap upload', 'Penyesuaian ukuran dasar', 'Copy singkat untuk desain', '1x revisi ringan', 'Cocok untuk kebutuhan promosi sederhana'],
+    description: 'Untuk kebutuhan visual sederhana seperti feed, story, poster digital, thumbnail, dan video content ringan.',
+    items: ['3 desain visual', '1 video content', 'Format siap upload', 'Copy singkat untuk desain', '1x revisi ringan'],
   },
   {
     title: 'Creative Growth',
     price: 'Mulai Rp750.000',
-    description: 'Untuk kebutuhan konten visual dan video yang lebih aktif seperti feed Instagram, carousel ringan, story, dan promosi brand.',
-    items: ['7 desain visual', '3 video content', 'Konsep visual sederhana', 'Copy singkat untuk desain', 'Format siap upload', '2x revisi ringan', 'Cocok untuk UMKM, personal brand, dan event'],
+    description: 'Untuk kebutuhan konten visual dan video yang lebih aktif seperti feed, carousel, story, dan promosi brand.',
+    items: ['7 desain visual', '3 video content', 'Konsep visual sederhana', 'Format siap upload', '2x revisi ringan'],
   },
   {
     title: 'Custom Creative',
     price: 'By Request',
-    description: 'Untuk branding visual, campaign besar, video content, paket konten bulanan, company profile, atau brief kompleks.',
-    items: ['Jumlah desain menyesuaikan', 'Jumlah video content menyesuaikan', 'Konsep menyesuaikan kebutuhan', 'Format final sesuai permintaan', 'Revisi sesuai kesepakatan', 'Cocok untuk project kreatif yang lebih besar'],
+    description: 'Untuk branding visual, campaign, video content, paket bulanan, company profile, atau brief khusus.',
+    items: ['Jumlah desain menyesuaikan', 'Jumlah video menyesuaikan', 'Konsep sesuai kebutuhan', 'Format final sesuai permintaan', 'Revisi sesuai kesepakatan'],
   },
 ];
 
@@ -93,7 +93,7 @@ function SectionHeading({ label, title, description }) {
   );
 }
 
-function HorizontalCards({ children, label, showDesktopArrows = false }) {
+function HorizontalCards({ children, label, showDesktopArrows = false, desktopAlignStart = false }) {
   const carouselRef = useRef(null);
   const cards = Children.toArray(children);
   const cardCount = cards.length;
@@ -158,18 +158,18 @@ function HorizontalCards({ children, label, showDesktopArrows = false }) {
     if (currentIndex <= 0) {
       currentIndex += cardCount;
       const slide = desktopSlides[currentIndex];
-      if (slide) carousel.scrollLeft = slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2;
+      if (slide) carousel.scrollLeft = desktopAlignStart ? slide.offsetLeft : slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2;
     } else if (currentIndex >= desktopSlides.length - 1) {
       currentIndex -= cardCount;
       const slide = desktopSlides[currentIndex];
-      if (slide) carousel.scrollLeft = slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2;
+      if (slide) carousel.scrollLeft = desktopAlignStart ? slide.offsetLeft : slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2;
     }
 
     const targetIndex = currentIndex + direction;
     const slide = desktopSlides[targetIndex];
     if (!slide) return;
     carousel.scrollTo({
-      left: slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2,
+      left: desktopAlignStart ? slide.offsetLeft : slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2,
       behavior: 'smooth',
     });
     activeDesktopSlideRef.current = targetIndex;
@@ -183,7 +183,7 @@ function HorizontalCards({ children, label, showDesktopArrows = false }) {
         const desktopSlides = carouselRef.current?.querySelectorAll('[data-desktop-slide]');
         const slide = desktopSlides?.[cardCount];
         if (!slide || !carouselRef.current) return;
-        carouselRef.current.scrollLeft = slide.offsetLeft - (carouselRef.current.clientWidth - slide.clientWidth) / 2;
+        carouselRef.current.scrollLeft = desktopAlignStart ? slide.offsetLeft : slide.offsetLeft - (carouselRef.current.clientWidth - slide.clientWidth) / 2;
         activeDesktopSlideRef.current = cardCount;
       }
     };
@@ -193,7 +193,7 @@ function HorizontalCards({ children, label, showDesktopArrows = false }) {
       window.removeEventListener('resize', setInitialPosition);
       window.clearTimeout(transitionTimerRef.current);
     };
-  }, [cardCount, showDesktopArrows]);
+  }, [cardCount, desktopAlignStart, showDesktopArrows]);
 
   return (
     <div className="relative mt-7 min-w-0">
@@ -319,13 +319,13 @@ export default function Creative() {
             <SectionHeading label="Harga Layanan Surgency Creative" title="Paket Creative mulai Rp350.000" description="Harga layanan Surgency Creative menyesuaikan jumlah desain, tingkat kesulitan, deadline, kebutuhan revisi, dan format final yang dibutuhkan. Konsultasikan kebutuhanmu terlebih dahulu agar tim Surgency bisa memberikan estimasi harga yang paling sesuai." />
             <HorizontalCards label="Pilihan harga Surgency Creative">
               {prices.map(({ title, price, description, items }, index) => (
-                <article key={title} className={`flex min-h-[570px] basis-[86%] shrink-0 snap-center flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_14px_34px_rgba(9,19,68,0.07)] md:basis-[48%] lg:basis-[calc(33.333%-0.7rem)] ${index === 1 ? 'border-2 border-primary' : 'border border-primary-dark/10'}`}>
-                  <div className={`${index === 1 ? 'bg-primary' : 'bg-primary-dark'} px-5 py-5 text-center`}><p className="text-xl font-extrabold uppercase tracking-wide text-white">{title}</p></div>
-                  <div className="flex flex-1 flex-col p-5">
-                    <p className="text-center text-2xl font-extrabold tracking-tight text-primary">{price}</p>
-                    <p className="mt-3 text-sm leading-6 text-text-body/70">{description}</p>
-                    <div className="my-4 h-px bg-primary-dark/10" />
-                    <ul className="grid gap-2">{items.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</ul>
+                <article key={title} className={`flex min-h-[475px] basis-[92%] shrink-0 snap-center flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_14px_34px_rgba(9,19,68,0.07)] md:min-h-[520px] md:basis-[48%] lg:basis-[calc(33.333%-0.7rem)] ${index === 1 ? 'border-2 border-primary' : 'border border-primary-dark/10'}`}>
+                  <div className={`${index === 1 ? 'bg-primary' : 'bg-primary-dark'} px-4 py-4 text-center sm:px-5 sm:py-5`}><p className="text-lg font-extrabold uppercase tracking-wide text-white sm:text-xl">{title}</p></div>
+                  <div className="flex flex-1 flex-col p-4 sm:p-5">
+                    <p className="text-center text-[1.35rem] font-extrabold tracking-tight text-primary sm:text-2xl">{price}</p>
+                    <p className="mt-3 text-[13px] leading-5 text-text-body/70 sm:text-sm sm:leading-6">{description}</p>
+                    <div className="my-3 h-px bg-primary-dark/10 sm:my-4" />
+                    <ul className="grid gap-1.5 sm:gap-2">{items.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</ul>
                     <a href={PRICE_LINK} target="_blank" rel="noopener noreferrer" className={`mt-auto inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-white transition ${index === 1 ? 'bg-primary hover:bg-primary-dark' : 'bg-primary-dark hover:bg-primary'}`}><FaWhatsapp />Konsultasi Harga Creative</a>
                   </div>
                 </article>
@@ -334,7 +334,7 @@ export default function Creative() {
             <p className="mt-1 text-center text-xs leading-5 text-text-body/60">Harga dapat berubah sesuai detail brief, jumlah desain, deadline, tingkat kesulitan, kebutuhan revisi, dan format final yang diminta.</p>
             <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-primary/15 bg-white p-5 text-center shadow-sm">
               <p className="text-sm leading-6 text-text-body/75">Butuh desain sekaligus landing page? Kamu bisa memilih paket Creative + Digital agar kebutuhan visual dan website dikerjakan dalam satu alur yang lebih hemat dan terarah.</p>
-              <a href="/#paket" className="mt-3 inline-flex items-center gap-1 text-sm font-extrabold text-primary hover:text-primary-dark">Lihat Paket Creative + Digital <HiChevronRight /></a>
+              <a href="/#paket-creative-digital" className="mt-3 inline-flex items-center gap-1 text-sm font-extrabold text-primary hover:text-primary-dark">Lihat Paket Creative + Digital <HiChevronRight /></a>
             </div>
           </div>
         </section>
@@ -378,12 +378,15 @@ export default function Creative() {
         <section className="bg-surface-alt px-6 py-14 sm:px-10 md:py-20 lg:px-16">
           <div className="mx-auto max-w-6xl">
             <SectionHeading label="Alur kerja" title="Proses kreatif yang ringkas dan terarah" />
-            <HorizontalCards label="Alur kerja Surgency Creative">
+            <HorizontalCards label="Alur kerja Surgency Creative" showDesktopArrows desktopAlignStart>
               {steps.map(({ title, text }, index) => (
-                <article key={title} className="min-h-[250px] basis-[86%] shrink-0 snap-center rounded-2xl border border-primary-dark/5 bg-white p-5 shadow-sm md:basis-[42%] lg:basis-[calc(20%-0.8rem)]">
-                  <div className="flex items-center justify-between"><span className="text-2xl font-extrabold text-primary">{String(index + 1).padStart(2, '0')}</span><HiOutlineLightningBolt className="text-xl text-primary-dark/30" /></div>
-                  <h3 className="mt-5 text-base font-extrabold text-primary-dark">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-text-body/70">{text}</p>
+                <article key={title} className="flex min-h-[285px] basis-[86%] shrink-0 snap-center flex-col rounded-[22px] border border-primary-dark/10 bg-white p-5 shadow-[0_12px_28px_rgba(9,19,68,0.06)] transition hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(9,19,68,0.1)] md:basis-[48%] lg:basis-[calc(33.333%-0.7rem)]">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-xl font-extrabold text-primary">{String(index + 1).padStart(2, '0')}</span>
+                    <HiOutlineLightningBolt className="text-2xl text-primary/35" />
+                  </div>
+                  <h3 className="mt-6 text-lg font-extrabold leading-6 text-primary-dark">{title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-text-body/70">{text}</p>
                 </article>
               ))}
             </HorizontalCards>

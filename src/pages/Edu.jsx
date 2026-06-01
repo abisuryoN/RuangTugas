@@ -311,9 +311,9 @@ export default function Edu() {
                 <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-primary-dark shadow-sm">
                   Detail Layanan
                 </div>
-                <h1 className="font-heading text-[3.15rem] font-extrabold leading-[0.9] tracking-normal text-text-heading sm:text-6xl lg:text-[4.6rem] xl:text-[5.05rem]">
+                <h1 className="font-heading text-[3.15rem] font-extrabold leading-[1.02] tracking-normal text-text-heading sm:text-6xl sm:leading-[0.95] lg:text-[4.6rem] lg:leading-[0.9] xl:text-[5.05rem]">
                   Surgency
-                  <span className="block text-primary">Edu</span>
+                  <span className="mt-2 block text-primary sm:mt-1 lg:mt-0">Edu</span>
                 </h1>
                 <p className="mx-auto mt-5 max-w-lg text-lg font-bold leading-7 text-primary-dark lg:mx-0">
                   Pendampingan akademik yang rapi, terarah, dan mudah dipahami.

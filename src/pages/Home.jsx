@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
@@ -13,6 +14,13 @@ import Kontak from '../components/Kontak';
 import Footer from '../components/Footer';
 
 export default function Home() {
+  useEffect(() => {
+    if (!window.location.hash) return;
+
+    const target = document.querySelector(window.location.hash);
+    target?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <SEO />

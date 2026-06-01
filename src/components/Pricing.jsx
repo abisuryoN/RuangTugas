@@ -260,7 +260,7 @@ export default function Pricing() {
               <img src="/surgency-01.png" alt="Surgency Studio" />
             </div>
 
-            <h2 className="pricing-title">
+            <h2 id="paket-creative-digital" className="pricing-title scroll-mt-28 md:scroll-mt-32">
               Paket Surgency <span>Studio</span>
             </h2>
             <p className="pricing-subtitle">
