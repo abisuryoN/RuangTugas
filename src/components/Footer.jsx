@@ -75,6 +75,21 @@ export default function Footer() {
                   </span>
                   0857 1963 0624
                 </a>
+                <a
+                  href="https://www.instagram.com/surgency.studio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  <span className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-xs">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <rect x="3" y="3" width="18" height="18" rx="5" />
+                      <circle cx="12" cy="12" r="4" />
+                      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                    </svg>
+                  </span>
+                  @surgency.studio
+                </a>
                 <p className="text-sm text-white/60">
                   Indonesia (Konsultasi Online)
                 </p>

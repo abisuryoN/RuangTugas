@@ -40,8 +40,8 @@ const portfolio = [
 const audiences = ['UMKM', 'Bisnis kecil', 'Personal brand', 'Sekolah atau lembaga', 'Organisasi', 'Komunitas', 'Event', 'Agency kecil', 'Project kuliah', 'Startup awal', 'Sistem internal sederhana', 'Brand yang butuh landing page'];
 const benefits = ['Dikerjakan oleh web developer berpengalaman 10 tahun', 'Konsultasi brief sebelum pengerjaan', 'Struktur website disusun rapi', 'Responsive di mobile dan desktop', 'CTA WhatsApp jelas', 'Bisa request referensi desain', 'Basic SEO untuk website', 'Deployment basic', 'Revisi aman sesuai kesepakatan', 'Alur penggunaan mudah dipahami', 'Cocok untuk website bisnis dan sistem internal', 'Timeline menyesuaikan tingkat kesulitan'];
 const technologies = [
-  { title: 'Frontend', items: ['HTML', 'CSS', 'JavaScript', 'React', 'Responsive layout', 'UI component'] },
-  { title: 'Backend & Database', items: ['PHP', 'Laravel', 'MySQL', 'API sederhana', 'Sistem login basic', 'CRUD data'] },
+  { title: 'Frontend', items: ['HTML', 'CSS', 'JavaScript', 'React', 'Vue', 'Responsive layout', 'UI component'] },
+  { title: 'Backend & Database', items: ['PHP', 'Laravel', 'CodeIgniter', 'Node.js', 'Python', 'PostgreSQL', 'MySQL', 'MariaDB', 'API sederhana', 'Sistem login basic', 'CRUD data'] },
   { title: 'Final Output', items: ['File project', 'Website siap deploy', 'Basic documentation', 'Panduan penggunaan sederhana', 'Deployment basic', 'Revisi sesuai scope'] },
 ];
 const steps = [
@@ -58,58 +58,116 @@ function Heading({ label, title, description }) {
 function CheckItem({ children }) {
   return <li className="flex items-start gap-2 text-sm leading-6 text-text-body/80"><span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-xs text-white"><HiCheck /></span><span>{children}</span></li>;
 }
-function Slider({ children, label, showDesktopArrows = false, infinite = false }) {
+function Slider({ children, label, showDesktopArrows = false, infinite = false, initialIndex = 0 }) {
   const ref = useRef(null);
   const cards = Children.toArray(children);
   const cardCount = cards.length;
-  const activeSlideRef = useRef(infinite ? cardCount : 0);
-  const slides = infinite
-    ? Array.from({ length: 3 }, (_, groupIndex) => cards.map((card, index) => cloneElement(card, { key: `loop-${groupIndex}-${card.key ?? index}` }))).flat()
-    : cards;
+  const activeMobileSlideRef = useRef(cardCount * 2 + initialIndex);
+  const activeDesktopSlideRef = useRef(cardCount);
+  const mobileSlides = Array.from({ length: 5 }, (_, groupIndex) =>
+    cards.map((card, index) => cloneElement(card, {
+      key: `mobile-${groupIndex}-${card.key ?? index}`,
+      className: `${card.props.className} md:!hidden`,
+    })),
+  ).flat();
+  const desktopSlides = Array.from({ length: infinite ? 3 : 1 }, (_, groupIndex) =>
+    cards.map((card, index) => cloneElement(card, {
+      key: `desktop-${groupIndex}-${card.key ?? index}`,
+      className: `${card.props.className} !hidden md:!flex`,
+      'data-desktop-slide': true,
+    })),
+  ).flat();
 
-  const jumpToSlide = (index) => {
+  const jumpToMobileSlide = (index) => {
     const carousel = ref.current;
     const slide = carousel?.children[index];
     if (!carousel || !slide) return;
     carousel.style.scrollBehavior = 'auto';
-    carousel.scrollLeft = slide.offsetLeft - 1;
-    activeSlideRef.current = index;
+    carousel.style.scrollSnapType = 'none';
+    carousel.scrollLeft = slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2;
+    activeMobileSlideRef.current = index;
     requestAnimationFrame(() => {
       carousel.style.scrollBehavior = '';
+      carousel.style.scrollSnapType = '';
     });
   };
 
-  const move = (direction) => {
+  const moveMobile = (direction) => {
     const carousel = ref.current;
     if (!carousel) return;
-    if (!infinite) {
-      carousel.scrollBy({ left: direction * Math.max(carousel.clientWidth * 0.78, 280), behavior: 'smooth' });
-      return;
-    }
-    let currentIndex = activeSlideRef.current;
-    if (currentIndex <= 0) {
-      currentIndex += cardCount;
-      jumpToSlide(currentIndex);
-    } else if (currentIndex >= slides.length - 1) {
-      currentIndex -= cardCount;
-      jumpToSlide(currentIndex);
+    let currentIndex = activeMobileSlideRef.current;
+    if (currentIndex <= cardCount) {
+      currentIndex += cardCount * 2;
+      jumpToMobileSlide(currentIndex);
+    } else if (currentIndex >= mobileSlides.length - cardCount - 1) {
+      currentIndex -= cardCount * 2;
+      jumpToMobileSlide(currentIndex);
     }
     const targetIndex = currentIndex + direction;
     const slide = carousel.children[targetIndex];
     if (!slide) return;
-    carousel.scrollTo({ left: slide.offsetLeft - 1, behavior: 'smooth' });
-    activeSlideRef.current = targetIndex;
+    carousel.scrollTo({
+      left: slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2,
+      behavior: 'smooth',
+    });
+    activeMobileSlideRef.current = targetIndex;
+  };
+
+  const moveDesktop = (direction) => {
+    const carousel = ref.current;
+    const slides = carousel?.querySelectorAll('[data-desktop-slide]');
+    if (!carousel || !slides?.length) return;
+    if (!infinite) {
+      carousel.scrollBy({ left: direction * Math.max(carousel.clientWidth * 0.78, 280), behavior: 'smooth' });
+      return;
+    }
+    let currentIndex = activeDesktopSlideRef.current;
+    if (currentIndex <= 0) {
+      currentIndex += cardCount;
+      carousel.scrollLeft = slides[currentIndex].offsetLeft;
+    } else if (currentIndex >= slides.length - 1) {
+      currentIndex -= cardCount;
+      carousel.scrollLeft = slides[currentIndex].offsetLeft;
+    }
+    const targetIndex = currentIndex + direction;
+    const slide = slides[targetIndex];
+    if (!slide) return;
+    carousel.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
+    activeDesktopSlideRef.current = targetIndex;
+  };
+
+  const move = (direction) => {
+    if (window.innerWidth < 768) {
+      moveMobile(direction);
+    } else {
+      moveDesktop(direction);
+    }
   };
 
   useEffect(() => {
-    if (!infinite) return;
-    const setInitialPosition = () => jumpToSlide(cardCount);
+    const setInitialPosition = () => {
+      const carousel = ref.current;
+      if (!carousel) return;
+      if (window.innerWidth < 768) {
+        jumpToMobileSlide(cardCount * 2 + initialIndex);
+      } else if (infinite) {
+        const slides = carousel.querySelectorAll('[data-desktop-slide]');
+        const slide = slides[cardCount];
+        if (!slide) return;
+        carousel.scrollLeft = slide.offsetLeft;
+        activeDesktopSlideRef.current = cardCount;
+      }
+    };
     requestAnimationFrame(setInitialPosition);
+    const initialPositionTimer = window.setTimeout(setInitialPosition, 120);
     window.addEventListener('resize', setInitialPosition);
-    return () => window.removeEventListener('resize', setInitialPosition);
-  }, [cardCount, infinite]);
+    return () => {
+      window.clearTimeout(initialPositionTimer);
+      window.removeEventListener('resize', setInitialPosition);
+    };
+  }, [cardCount, infinite, initialIndex]);
 
-  return <div className="relative mt-7 min-w-0"><div ref={ref} aria-label={label} className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-5 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-4 md:px-1">{slides}</div><button type="button" onClick={() => move(-1)} aria-label="Geser ke kiri" className={`absolute -left-3 top-1/2 h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-primary-dark text-xl text-white shadow-lg hover:bg-primary ${showDesktopArrows ? 'flex' : 'flex md:hidden'}`}><HiChevronLeft /></button><button type="button" onClick={() => move(1)} aria-label="Geser ke kanan" className={`absolute -right-3 top-1/2 h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-primary-dark text-xl text-white shadow-lg hover:bg-primary ${showDesktopArrows ? 'flex' : 'flex md:hidden'}`}><HiChevronRight /></button></div>;
+  return <div className="relative mt-7 min-w-0"><div ref={ref} aria-label={label} className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-7 pb-5 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-4 md:px-1">{mobileSlides}{desktopSlides}</div><button type="button" onClick={() => move(-1)} aria-label="Geser ke kiri" className={`absolute -left-3 top-1/2 h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-primary-dark text-xl text-white shadow-lg hover:bg-primary ${showDesktopArrows ? 'flex' : 'flex md:hidden'}`}><HiChevronLeft /></button><button type="button" onClick={() => move(1)} aria-label="Geser ke kanan" className={`absolute -right-3 top-1/2 h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-primary-dark text-xl text-white shadow-lg hover:bg-primary ${showDesktopArrows ? 'flex' : 'flex md:hidden'}`}><HiChevronRight /></button></div>;
 }
 
 export default function Digital() {
@@ -130,7 +188,7 @@ export default function Digital() {
       <section className="bg-white px-6 py-14 sm:px-10 md:py-20 lg:px-16"><div className="mx-auto max-w-6xl"><Heading label="Layanan detail" title="Yang Bisa Kami Bantu" description="Pembuatan website, aplikasi berbasis web, sistem sederhana, dan kebutuhan digital lainnya untuk bisnis, brand, lembaga, maupun project personal." /><Slider label="Layanan Digital">{serviceGroups.map((group) => <article key={group.title} className="flex min-h-[445px] basis-[90%] shrink-0 snap-center flex-col rounded-[24px] border border-primary-dark/10 bg-white p-5 shadow-sm md:basis-[48%] lg:basis-[calc(25%-0.75rem)]"><HiOutlineCode className="text-3xl text-primary" /><h3 className="mt-4 text-lg font-extrabold text-primary-dark">{group.title}</h3><ul className="mt-4 grid gap-2">{group.items.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</ul></article>)}</Slider></div></section>
       <WaveDivider topColor="#ffffff" bottomColor="#eef4ff" variant="layered" />
 
-      <section className="bg-secondary px-6 py-14 sm:px-10 md:py-20 lg:px-16"><div className="mx-auto max-w-6xl"><Heading label="Harga Layanan Surgency Digital" title="Web App & Sistem mulai Rp1.500.000" description="Harga menyesuaikan jenis project, jumlah halaman, kompleksitas fitur, deadline, integrasi, revisi, dan deployment. Konsultasikan kebutuhanmu agar estimasi harga lebih sesuai." /><p className="mt-3 text-sm font-bold text-primary-dark">Project dikerjakan oleh web developer berpengalaman 10 tahun dengan fokus pada struktur rapi, tampilan responsif, dan alur penggunaan yang jelas.</p><Slider label="Harga Digital">{prices.map((pkg, index) => <article key={pkg.title} className={`flex min-h-[475px] basis-[92%] shrink-0 snap-center flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_14px_34px_rgba(9,19,68,0.07)] md:min-h-[520px] md:basis-[48%] lg:basis-[calc(33.333%-0.7rem)] ${index === 1 ? 'border-2 border-primary' : 'border border-primary-dark/10'}`}><div className={`${index === 1 ? 'bg-primary' : 'bg-primary-dark'} px-4 py-4 text-center sm:px-5 sm:py-5`}><p className="text-lg font-extrabold uppercase tracking-wide text-white sm:text-xl">{pkg.title}</p></div><div className="flex flex-1 flex-col p-4 sm:p-5"><p className="text-center text-[1.35rem] font-extrabold tracking-tight text-primary sm:text-2xl">{pkg.price}</p><p className="mt-3 text-[13px] leading-5 text-text-body/70 sm:text-sm sm:leading-6">{pkg.description}</p><div className="my-3 h-px bg-primary-dark/10 sm:my-4" /><ul className="grid gap-1.5 sm:gap-2">{pkg.items.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</ul><a href={PRICE_LINK} target="_blank" rel="noopener noreferrer" className={`mt-auto inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-white transition ${index === 1 ? 'bg-primary hover:bg-primary-dark' : 'bg-primary-dark hover:bg-primary'}`}><FaWhatsapp />Konsultasi Harga Digital</a></div></article>)}</Slider><p className="mt-1 text-center text-xs leading-5 text-text-body/60">Harga dapat berubah sesuai halaman, fitur, deadline, integrasi, revisi, hosting, domain, dan kompleksitas sistem. Domain, hosting, plugin premium, API berbayar, atau layanan pihak ketiga belum termasuk kecuali disepakati di awal.</p></div></section>
+      <section className="bg-secondary px-6 py-14 sm:px-10 md:py-20 lg:px-16"><div className="mx-auto max-w-6xl"><Heading label="Harga Layanan Surgency Digital" title="Web App & Sistem mulai Rp1.500.000" description="Harga menyesuaikan jenis project, jumlah halaman, kompleksitas fitur, deadline, integrasi, revisi, dan deployment. Konsultasikan kebutuhanmu agar estimasi harga lebih sesuai." /><p className="mt-3 text-sm font-bold text-primary-dark">Project dikerjakan oleh web developer berpengalaman 10 tahun dengan fokus pada struktur rapi, tampilan responsif, dan alur penggunaan yang jelas.</p><Slider label="Harga Digital" initialIndex={0}>{prices.map((pkg, index) => <article key={pkg.title} className={`flex min-h-[475px] basis-[92%] shrink-0 snap-center flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_14px_34px_rgba(9,19,68,0.07)] md:min-h-[520px] md:basis-[48%] lg:basis-[calc(33.333%-0.7rem)] ${index === 1 ? 'border-2 border-primary' : 'border border-primary-dark/10'}`}><div className={`${index === 1 ? 'bg-primary' : 'bg-primary-dark'} px-4 py-4 text-center sm:px-5 sm:py-5`}><p className="text-lg font-extrabold uppercase tracking-wide text-white sm:text-xl">{pkg.title}</p></div><div className="flex flex-1 flex-col p-4 sm:p-5"><p className="text-center text-[1.35rem] font-extrabold tracking-tight text-primary sm:text-2xl">{pkg.price}</p><p className="mt-3 text-[13px] leading-5 text-text-body/70 sm:text-sm sm:leading-6">{pkg.description}</p><div className="my-3 h-px bg-primary-dark/10 sm:my-4" /><ul className="grid gap-1.5 sm:gap-2">{pkg.items.map((item) => <CheckItem key={item}>{item}</CheckItem>)}</ul><a href={PRICE_LINK} target="_blank" rel="noopener noreferrer" className={`mt-auto inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-white transition ${index === 1 ? 'bg-primary hover:bg-primary-dark' : 'bg-primary-dark hover:bg-primary'}`}><FaWhatsapp />Konsultasi Harga Digital</a></div></article>)}</Slider><p className="mt-1 text-center text-xs leading-5 text-text-body/60">Harga dapat berubah sesuai halaman, fitur, deadline, integrasi, revisi, hosting, domain, dan kompleksitas sistem. Domain, hosting, plugin premium, API berbayar, atau layanan pihak ketiga belum termasuk kecuali disepakati di awal.</p></div></section>
 
       <section className="bg-white px-6 py-14 sm:px-10 md:py-20 lg:px-16"><div className="mx-auto max-w-6xl"><Heading label="Portfolio" title="Beberapa project digital yang bisa ditampilkan" description="Contoh tampilan website yang menjadi gambaran style dan pendekatan pengembangan Surgency Digital." /><Slider label="Portfolio Digital">{portfolio.map((item) => <article key={item.title} className="flex basis-[92%] shrink-0 snap-center flex-col overflow-hidden rounded-[24px] border border-primary-dark/10 bg-white shadow-sm md:basis-[48%]"><div className="aspect-video overflow-hidden bg-secondary"><img src={item.image} alt={item.title} className="h-full w-full object-cover transition duration-300 hover:scale-105" /></div><h3 className="p-4 text-sm font-extrabold text-primary-dark">{item.title}</h3></article>)}</Slider></div></section>
 
